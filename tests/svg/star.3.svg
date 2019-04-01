@@ -1,0 +1,81 @@
+<svg viewBox="0 0 300 100"
+ xmlns="http://www.w3.org/2000/svg"
+ xmlns:xlink="http://www.w3.org/1999/xlink" >
+  <script href="../../svg-extend.js"></script>
+
+  <desc>
+  This test how r attribute influence the final shape
+
+    * `r` with one value produce a regular polygon
+    * `r` with two values produce a star
+    * `r` with three values produce a complex star with vertex being distributed anti-clockwise
+  </desc>
+
+  <style>
+    .reference { fill: red; }
+    .result    { fill: green; }
+  </style>
+
+  <svg viewBox="0 0 100 100" x="0" width="100">
+    <defs>`r` with one value</defs>
+
+    <!-- Reference view: The test is passing if no red is visible  -->
+    <polygon class="reference"
+      points="50,10
+              11.95773,37.63932
+              26.48858,82.36067
+              73.51141,82.36067
+              88.04226,37.63932" />
+
+     <!-- Create a pentagon -->
+    <polygon class="result"
+      is="n-star" cx="50" cy="50" r="40" vertex="5" />
+  </svg>
+
+  <svg viewBox="0 0 100 100" x="100" width="100">
+    <defs>`r` with two value</defs>
+
+    <!-- Reference view: The test is passing if no red is visible  -->
+    <polygon class="reference"
+      points="50,10
+              38.24429,33.81966
+              11.95773,37.63932
+              30.97886,56.18033
+              26.48858,82.36067
+              50,70
+              73.51141,82.36067
+              69.02113,56.18033
+              88.04226,37.63932
+              61.75570,33.81966" />
+
+    <!-- Create a five pointed star -->
+    <polygon class="result"
+      is="n-star" cx="50" cy="50" r="40,20" vertex="5" />
+  </svg>
+
+  <svg viewBox="0 0 100 100" x="200" width="100">
+    <defs>`r` with three value</defs>
+
+    <!-- Reference view: The test is passing if no red is visible  -->
+    <polygon class="reference"
+      points="50,10
+              62.20209,22.59363
+              64.86289,36.61738
+              88.04226,37.63932
+              79.83565,53.13585
+              67.32050,60
+              73.51141,82.36067
+              56.23735,79.34442
+              45.84176,69.56295
+              26.48858,82.36067
+              24.01923,65
+              30.10956,52.09056
+              11.95773,37.63932
+              27.70565,29.92608
+              41.86526,31.72909"/>
+
+    <!-- Create a five pointed star with some tilt on the left -->
+    <polygon class="result"
+      is="n-star" cx="50" cy="50" r="40,30,20" vertex="5" />
+  </svg>
+</svg>

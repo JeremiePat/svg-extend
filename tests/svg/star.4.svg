@@ -1,0 +1,104 @@
+<svg viewBox="0 0 300 100"
+ xmlns="http://www.w3.org/2000/svg"
+ xmlns:xlink="http://www.w3.org/1999/xlink" >
+  <script href="../../svg-extend.js"></script>
+
+  <desc>
+  This test programatic DOM mutations
+
+    * Applied to all types of extended element
+    * On both `DOMContentLoaded` and `load` event
+  </desc>
+
+  <style>
+    .reference { fill: red; }
+    .result    { fill: green; }
+  </style>
+
+  <g>
+    <defs>Test applied on path element on DOMContentLoaded</defs>
+
+    <!-- Reference view: The test is passing if no red is visible  -->
+    <path class="reference"
+      d="M50,10
+         L11.95773,37.63932
+         L26.48858,82.36067
+         L73.51141,82.36067
+         L88.04226,37.63932 z"/>
+
+    <!-- Create a pentagon centered at coordinate 50,50 with a redius of 40 -->
+    <path class="result" id="p1" />
+
+    <script>
+    <![CDATA[
+    window.addEventListener('DOMContentLoaded', () => {
+      const node = document.getElementById('p1')
+      node.setAttribute('is', 'n-star')
+      node.setAttribute('cx', 50)
+      node.setAttribute('cy', 50)
+      node.setAttribute('vertex', 5)
+      node.setAttribute('r', 40)
+    })
+    ]]>
+    </script>
+  </g>
+
+  <g>
+    <defs>Test applied on polygon element on load</defs>
+
+    <!-- Reference view: The test is passing if no red is visible  -->
+    <polygon class="reference"
+      points="150,10
+              111.95773,37.63932
+              126.48858,82.36067
+              173.51141,82.36067
+              188.04226,37.63932"/>
+
+    <!-- Create a pentagon centered at coordinate 150,50 with a redius of 40 -->
+    <polygon class="result" id="p2" />
+
+    <script>
+    <![CDATA[
+    window.addEventListener('load', () => {
+      const node = document.getElementById('p2')
+      node.setAttribute('is', 'n-star')
+      node.setAttribute('cx', 150)
+      node.setAttribute('cy', 50)
+      node.setAttribute('vertex', 5)
+      node.setAttribute('r', 40)
+    })
+    ]]>
+    </script>
+  </g>
+
+
+
+  <g>
+    <defs>Test applied on polyline element on load and update its className</defs>
+
+    <!-- Reference view: The test is passing if no red is visible  -->
+    <polyline class="reference"
+      points="250,10
+              211.95773,37.63932
+              226.48858,82.36067
+              273.51141,82.36067
+              288.04226,37.63932"/>
+
+    <!-- Create a pentagon centered at coordinate 250,50 with a redius of 40 -->
+    <polyline class="reference" id="p3" />
+
+    <script>
+    <![CDATA[
+    window.addEventListener('load', () => {
+      const node = document.getElementById('p3')
+      node.setAttribute('is', 'n-star')
+      node.setAttribute('cx', 250)
+      node.setAttribute('cy', 50)
+      node.setAttribute('vertex', 5)
+      node.setAttribute('r', 40)
+      node.className.baseVal = 'result'
+    })
+    ]]>
+    </script>
+  </g>
+</svg>

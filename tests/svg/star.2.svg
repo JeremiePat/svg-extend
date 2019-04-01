@@ -1,0 +1,38 @@
+<svg viewBox="0 0 200 100"
+ xmlns="http://www.w3.org/2000/svg"
+ xmlns:xlink="http://www.w3.org/1999/xlink" >
+  <script href="../../svg-extend.js"></script>
+
+  <desc>
+  This test how the shape is drawn with attribute default value when they are not set
+
+    * If only `is`is defined nothing is drawn
+    * Once `r` is set with a single non 0 value, we get a triangle
+  </desc>
+
+  <style>
+    .reference { fill: red; }
+    .result    { fill: green; }
+  </style>
+
+  <svg viewBox="0 0 100 100" x="0" width="100">
+    <defs>Only set the `is` attribute</defs>
+
+    <!-- This shouldn't draw anything as r default to 0 -->
+    <polygon class="reference" is="n-star" />
+  </svg>
+
+  <svg viewBox="-50 -50 100 100" x="100" width="100">
+    <defs>Only set the `is` and `r` attributes</defs>
+
+    <!-- Reference view: The test is passing if no red is visible  -->
+    <polygon class="reference"
+      points="  0,-40
+              -34.64101,19.99993
+               34.64101,20.00018"/>
+
+    <!-- Create a triangle centered at coordinate 0,0 with a redius of 40 -->
+    <polygon class="result"
+      is="n-star" r="40" />
+  </svg>
+</svg>

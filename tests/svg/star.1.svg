@@ -1,0 +1,67 @@
+<svg viewBox="0 0 300 100"
+ xmlns="http://www.w3.org/2000/svg"
+ xmlns:xlink="http://www.w3.org/1999/xlink" >
+  <script href="../../svg-extend.js"></script>
+
+  <desc>
+  This test a basic case for the n-star extended element
+
+    * All attributes are set with a valid value
+    * The `r` attribute has only one value
+  </desc>
+
+  <style>
+    .reference { fill: red; }
+    .result    { fill: green; }
+  </style>
+
+  <g>
+    <defs>Test applied on path element</defs>
+
+    <!-- Reference view: The test is passing if no red is visible  -->
+    <path class="reference"
+      d="M50,10
+         L11.95773,37.63932
+         L26.48858,82.36067
+         L73.51141,82.36067
+         L88.04226,37.63932 z"/>
+
+    <!-- Create a pentagon centered at coordinate 50,50 with a redius of 40 -->
+    <path class="result"
+      is="n-star" cx="50" cy="50" r="40" vertex="5" />
+  </g>
+
+  <g>
+    <defs>Test applied on polygon element</defs>
+
+    <!-- Reference view: The test is passing if no red is visible  -->
+    <polygon class="reference"
+      points="150,10
+              111.95773,37.63932
+              126.48858,82.36067
+              173.51141,82.36067
+              188.04226,37.63932"/>
+
+    <!-- Create a pentagon centered at coordinate 150,50 with a redius of 40 -->
+    <polygon class="result"
+      is="n-star" cx="150" cy="50" r="40" vertex="5" />
+  </g>
+
+
+
+  <g>
+    <defs>Test applied on polyline element</defs>
+
+    <!-- Reference view: The test is passing if no red is visible  -->
+    <polyline class="reference"
+      points="250,10
+              211.95773,37.63932
+              226.48858,82.36067
+              273.51141,82.36067
+              288.04226,37.63932"/>
+
+    <!-- Create a pentagon centered at coordinate 250,50 with a redius of 40 -->
+    <polyline class="result"
+      is="n-star" cx="250" cy="50" r="40" vertex="5" />
+  </g>
+</svg>
