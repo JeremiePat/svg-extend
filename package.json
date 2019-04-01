@@ -1,20 +1,17 @@
 {
   "name": "svg-extend",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "SGV Extend provides some nice declarative extention to SVG",
-  "main": "index.js",
-  "directories": {
-    "lib": "lib",
-    "test": "tests"
-  },
+  "browser": "index.js",
   "scripts": {
     "build": "webpack && backstop --config=backstop.config.js reference",
     "test": "backstop --config=backstop.config.js test"
   },
-  "keywords": [
-    "web",
-    "svg"
-  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JeremiePat/svg-extend.git"
+  },
+  "keywords": ["browser","svg"],
   "author": "Jeremie Patonnier <jeremie.patonnier@gmail.com>",
   "license": "0BSD",
   "devDependencies": {
