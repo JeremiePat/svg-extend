@@ -1,0 +1,36 @@
+{
+  "name": "svg-extend",
+  "version": "0.0.0",
+  "description": "SGV Extend provides some nice declarative extention to SVG",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "tests"
+  },
+  "scripts": {
+    "build": "webpack && backstop --config=backstop.config.js reference",
+    "test": "backstop --config=backstop.config.js test"
+  },
+  "keywords": [
+    "web",
+    "svg"
+  ],
+  "author": "Jeremie Patonnier <jeremie.patonnier@gmail.com>",
+  "license": "0BSD",
+  "devDependencies": {
+    "@babel/core": "^7.4.0",
+    "@babel/plugin-transform-runtime": "^7.4.0",
+    "@babel/preset-env": "^7.4.2",
+    "babel-loader": "^8.0.5",
+    "backstopjs": "^3.8.8",
+    "eslint": "^5.16.0",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-node": "^8.0.1",
+    "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-standard": "^4.0.0",
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.3.0"
+  },
+  "browserslist": "ie 11"
+}

@@ -1,0 +1,17 @@
+parserOptions:
+  ecmaVersion: 6
+  sourceType: "module"
+
+env:
+  es6: true
+  browser: true
+
+extends: "standard"
+rules:
+  space-infix-ops: "off"
+  no-multi-spaces: "off"
+  key-spacing: "off"
+  brace-style:
+    - "error"
+    - "stroustrup"
+    - allowSingleLine: true
