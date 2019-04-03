@@ -1,0 +1,494 @@
+<svg viewBox="0 0 800 500"
+ xmlns="http://www.w3.org/2000/svg"
+ xmlns:xlink="http://www.w3.org/1999/xlink" >
+  <script href="../../svg-extend.js"></script>
+
+  <desc>
+  This test the impact of density for the n-gon extended element
+
+    * With a pentagon with 3 to 7 vertex
+    * All value for density from 0 to (number of vertex)
+    * On path
+  </desc>
+
+  <style>
+    .reference { fill: none; stroke-linecap: round; stroke-width: 5px; stroke: red; }
+    .result    { fill: none; stroke-linecap: round; stroke-width: 6px; stroke: green; }
+  </style>
+
+  <g> <!-- TRIANGLE -->
+    <g>
+      <defs>Density of 0 (You got individual points) on a path</defs>
+
+      <!-- Reference view: The test is passing if no red is visible  -->
+      <path class="reference"
+        d="M50,10z
+          M15.35898,70z
+          M84.64101,70z"/>
+
+      <!-- Create the triangle -->
+      <path class="result"
+        is="n-gon" cx="50" cy="50" r="40" vertex="3" density="0" />
+    </g>
+    <g>
+      <defs>Density of 1 (triangle) on a path</defs>
+
+      <!-- Reference view: The test is passing if no red is visible  -->
+      <path class="reference"
+        d="M150,10
+          M115.35898,70
+          M184.64101,70z"/>
+
+      <!-- Create the triangle -->
+      <path class="result"
+        is="n-gon" cx="150" cy="50" r="40" vertex="3" density="1" />
+    </g>
+    <g>
+      <defs>Density of 2 (triangle) on a path</defs>
+
+      <!-- Reference view: The test is passing if no red is visible  -->
+      <path class="reference"
+        d="M250,10
+          M215.35898,70
+          M284.64101,70z"/>
+
+      <!-- Create the triangle -->
+      <path class="result"
+        is="n-gon" cx="250" cy="50" r="40" vertex="3" density="2" />
+    </g>
+    <g>
+      <defs>Density of 3 (You got individual points) on a path</defs>
+
+      <!-- Reference view: The test is passing if no red is visible  -->
+      <path class="reference"
+        d="M350,10z
+          M315.35898,70z
+          M384.64101,70z"/>
+
+      <!-- Create the triangle -->
+      <path class="result"
+        is="n-gon" cx="350" cy="50" r="40" vertex="3" density="3" />
+    </g>
+  </g>
+
+  <g> <!-- SQUARE (DIAMOND) -->
+    <g>
+      <defs>Density of 0 (You got individual points) on a path</defs>
+
+      <!-- Reference view: The test is passing if no red is visible  -->
+      <path class="reference"
+        d="M50,110z
+           M90,150z
+           M50,190z
+           M10,150z"/>
+
+      <!-- Create the triangle -->
+      <path class="result"
+        is="n-gon" cx="50" cy="150" r="40" vertex="4" density="0" />
+    </g>
+    <g>
+      <defs>Density of 1 (diamond) on a path</defs>
+
+      <!-- Reference view: The test is passing if no red is visible  -->
+      <path class="reference"
+        d="M150,110
+            190,150
+            150,190
+            110,150z"/>
+
+      <!-- Create the triangle -->
+      <path class="result"
+        is="n-gon" cx="150" cy="150" r="40" vertex="4" density="1" />
+    </g>
+    <g>
+      <defs>Density of 2 (lines) on a path</defs>
+
+      <!-- Reference view: The test is passing if no red is visible  -->
+      <path class="reference"
+        d="M250,110
+            250,190z
+           M210,150
+            290,150z"/>
+
+      <!-- Create the triangle -->
+      <path class="result"
+        is="n-gon" cx="250" cy="150" r="40" vertex="4" density="2" />
+    </g>
+    <g>
+      <defs>Density of 3 (diamond) on a path</defs>
+
+      <!-- Reference view: The test is passing if no red is visible  -->
+      <path class="reference"
+        d="M350,110
+            310,150
+            350,190
+            390,150z"/>
+
+      <!-- Create the triangle -->
+      <path class="result"
+        is="n-gon" cx="350" cy="150" r="40" vertex="4" density="3" />
+    </g>
+    <g>
+      <defs>Density of 4 (You got individual points) on a path</defs>
+
+      <!-- Reference view: The test is passing if no red is visible  -->
+      <path class="reference"
+        d="M450,110z
+           M490,150z
+           M450,190z
+           M410,150z"/>
+
+      <!-- Create the triangle -->
+      <path class="result"
+        is="n-gon" cx="450" cy="150" r="40" vertex="4" density="4" />
+    </g>
+  </g>
+
+  <g> <!-- PENTAGON/PENTAGRAM -->
+    <g>
+      <defs>Density of 0 (You got individual points) on a path</defs>
+
+      <!-- Reference view: The test is passing if no red is visible  -->
+      <path class="reference"
+        d="M50,210z
+           M88.04226,237.63932z
+           M73.51141,282.36067z
+           M26.48858,282.36067z
+           M11.95773,237.63932z"/>
+
+      <!-- Create the pentagon -->
+      <path class="result"
+        is="n-gon" cx="50" cy="250" r="40" vertex="5" density="0" />
+    </g>
+    <g>
+      <defs>Density of 1 (pentagon) on a path</defs>
+
+      <!-- Reference view: The test is passing if no red is visible  -->
+      <path class="reference"
+        d="M150,210
+            188.04226,237.63932
+            173.51141,282.36067
+            126.48858,282.36067
+            111.95773,237.63932z"/>
+
+      <!-- Create the pentagon -->
+      <path class="result"
+        is="n-gon" cx="150" cy="250" r="40" vertex="5" density="1" />
+    </g>
+    <g>
+      <defs>Density of 2 (pentagram) on a path</defs>
+
+      <!-- Reference view: The test is passing if no red is visible  -->
+      <path class="reference"
+        d="M250,210
+            273.51141,282.36067
+            211.95773,237.63932
+            288.04226,237.63932
+            226.48858,282.36067z"/>
+
+      <!-- Create the pentagram -->
+      <path class="result"
+        is="n-gon" cx="250" cy="250" r="40" vertex="5" density="2" />
+    </g>
+    <g>
+      <defs>Density of 3 (pentagram) on a path</defs>
+
+      <!-- Reference view: The test is passing if no red is visible  -->
+      <path class="reference"
+        d="M350,210
+            326.48858,282.36067
+            388.04226,237.63932
+            311.95773,237.63932
+            373.51141,282.36067z"/>
+
+      <!-- Create the pentagram -->
+      <path class="result"
+        is="n-gon" cx="350" cy="250" r="40" vertex="5" density="3" />
+    </g>
+    <g>
+      <defs>Density of 4 (pentagon) on a path</defs>
+
+      <!-- Reference view: The test is passing if no red is visible  -->
+      <path class="reference"
+        d="M450,210
+            411.95773,237.63932
+            426.48858,282.36067
+            473.51141,282.36067
+            488.04226,237.63932z"/>
+
+      <!-- Create the pentagon -->
+      <path class="result"
+        is="n-gon" cx="450" cy="250" r="40" vertex="5" density="4" />
+    </g>
+    <g>
+      <defs>Density of 5 (You got individual points) on a path</defs>
+
+      <!-- Reference view: The test is passing if no red is visible  -->
+      <path class="reference"
+        d="M550,210z
+           M588.04226,237.63932z
+           M573.51141,282.36067z
+           M526.48858,282.36067z
+           M511.95773,237.63932z"/>
+
+      <!-- Create the pentagon -->
+      <path class="result"
+        is="n-gon" cx="550" cy="250" r="40" vertex="5" density="5" />
+    </g>
+  </g>
+
+  <g> <!-- HEXAGON/HEXAGRAM -->
+    <g>
+      <defs>Density of 0 (You got individual points) on a path</defs>
+
+      <!-- Reference view: The test is passing if no red is visible  -->
+      <path class="reference"
+        d="M50,310z
+           M84.64101,330z
+           M84.64101,370z
+           M50,390z
+           M15.35898,370z
+           M15.35898,330z"/>
+
+      <!-- Create the hexagon -->
+      <path class="result"
+        is="n-gon" cx="50" cy="350" r="40" vertex="6" density="0" />
+    </g>
+    <g>
+      <defs>Density of 1 (hexagon) on a path</defs>
+
+      <!-- Reference view: The test is passing if no red is visible  -->
+      <path class="reference"
+        d="M150,310
+            184.64101,330
+            184.64101,370
+            150,390
+            115.35898,370
+            115.35898,330z"/>
+
+      <!-- Create the hexagon -->
+      <path class="result"
+        is="n-gon" cx="150" cy="350" r="40" vertex="6" density="1" />
+    </g>
+    <g>
+      <defs>Density of 2 (hexagram) on a path</defs>
+
+      <!-- Reference view: The test is passing if no red is visible  -->
+      <path class="reference"
+        d="M250,310
+            284.64101,370
+            215.35898,370z
+           M284.64101,330
+            250,390
+            215.35898,330z"/>
+
+      <!-- Create the hexagram -->
+      <path class="result"
+        is="n-gon" cx="250" cy="350" r="40" vertex="6" density="2" />
+    </g>
+    <g>
+      <defs>Density of 3 (lines) on a path</defs>
+
+      <!-- Reference view: The test is passing if no red is visible  -->
+      <path class="reference"
+        d="M350,310
+            350,390z
+           M384.64101,330
+            315.35898,370z
+           M384.64101,370
+            315.35898,330z"/>
+
+      <!-- Create the hexagram -->
+      <path class="result"
+        is="n-gon" cx="350" cy="350" r="40" vertex="6" density="3" />
+    </g>
+    <g>
+      <defs>Density of 4 (hexagon) on a path</defs>
+
+      <!-- Reference view: The test is passing if no red is visible  -->
+      <path class="reference"
+        d="M450,310
+            415.35898,370
+            484.64101,370z
+           M484.64101,330
+            415.35898,330
+            450,390z"/>
+
+      <!-- Create the hexagon -->
+      <path class="result"
+        is="n-gon" cx="450" cy="350" r="40" vertex="6" density="4" />
+    </g>
+    <g>
+      <defs>Density of 5 (hexagon) on a path</defs>
+
+      <!-- Reference view: The test is passing if no red is visible  -->
+      <path class="reference"
+        d="M550,310
+            515.35898,330
+            515.35898,370
+            550,390
+            584.64101,370
+            584.64101,330z"/>
+
+      <!-- Create the hexagon -->
+      <path class="result"
+        is="n-gon" cx="550" cy="350" r="40" vertex="6" density="5" />
+    </g>
+    <g>
+      <defs>Density of 6 (You got individual points) on a path</defs>
+
+      <!-- Reference view: The test is passing if no red is visible  -->
+      <path class="reference"
+        d="M650,310z
+           M684.64101,330z
+           M684.64101,370z
+           M650,390z
+           M615.35898,370z
+           M615.35898,330z"/>
+
+      <!-- Create the hexagon -->
+      <path class="result"
+        is="n-gon" cx="650" cy="350" r="40" vertex="6" density="6" />
+    </g>
+  </g>
+
+  <g> <!-- HEPTAGON/HEPTAGRAM -->
+    <g>
+      <defs>Density of 0 (You got individual points) on a path</defs>
+
+      <!-- Reference view: The test is passing if no red is visible  -->
+      <path class="reference"
+        d="M50,410z
+           M81.27325,425.06040z
+           M88.99711,458.90083z
+           M67.35534,486.03875z
+           M32.64465,486.03875z
+           M11.00288,458.90083z
+           M18.72674,425.06040z"/>
+
+      <!-- Create the heptagon -->
+      <path class="result"
+        is="n-gon" cx="50" cy="450" r="40" vertex="7" density="0" />
+    </g>
+    <g>
+      <defs>Density of 1 (heptagon) on a path</defs>
+
+      <!-- Reference view: The test is passing if no red is visible  -->
+      <path class="reference"
+        d="M150,410
+            181.27325,425.06040
+            188.99711,458.90083
+            167.35534,486.03875
+            132.64465,486.03875
+            111.00288,458.90083
+            118.72674,425.06040z"/>
+
+      <!-- Create the heptagon -->
+      <path class="result"
+        is="n-gon" cx="150" cy="450" r="40" vertex="7" density="1" />
+    </g>
+    <g>
+      <defs>Density of 2 (heptagram) on a path</defs>
+
+      <!-- Reference view: The test is passing if no red is visible  -->
+      <path class="reference"
+        d="M250,410
+            288.99711,458.90083
+            232.64465,486.03875
+            218.72674,425.06040
+            281.27325,425.06040
+            267.35534,486.03875
+            211.00288,458.90083z"/>
+
+      <!-- Create the heptagram -->
+      <path class="result"
+        is="n-gon" cx="250" cy="450" r="40" vertex="7" density="2" />
+    </g>
+    <g>
+      <defs>Density of 3 (heptagram) on a path</defs>
+
+      <!-- Reference view: The test is passing if no red is visible  -->
+      <path class="reference"
+        d="M350,410
+            367.35534,486.03875
+            318.72674,425.06040
+            388.99711,458.90083
+            311.00288,458.90083
+            381.27325,425.06040
+            332.64465,486.03875z"/>
+
+      <!-- Create the heptagram -->
+      <path class="result"
+        is="n-gon" cx="350" cy="450" r="40" vertex="7" density="3" />
+    </g>
+    <g>
+      <defs>Density of 4 (heptagon) on a path</defs>
+
+      <!-- Reference view: The test is passing if no red is visible  -->
+      <path class="reference"
+        d="M450,410
+            432.64465,486.03875
+            481.27325,425.06040
+            411.00288,458.90083
+            488.99711,458.90083
+            418.72674,425.06040
+            467.35534,486.03875z"/>
+
+      <!-- Create the heptagon -->
+      <path class="result"
+        is="n-gon" cx="450" cy="450" r="40" vertex="7" density="4" />
+    </g>
+    <g>
+      <defs>Density of 5 (heptagon) on a path</defs>
+
+      <!-- Reference view: The test is passing if no red is visible  -->
+      <path class="reference"
+        d="M550,410
+            511.00288,458.90083
+            567.35534,486.03875
+            581.27325,425.06040
+            518.72674,425.06040
+            532.64465,486.03875
+            588.99711,458.90083z"/>
+
+      <!-- Create the heptagon -->
+      <path class="result"
+        is="n-gon" cx="550" cy="450" r="40" vertex="7" density="5" />
+    </g>
+    <g>
+      <defs>Density of 6 (heptagon) on a path</defs>
+
+      <!-- Reference view: The test is passing if no red is visible  -->
+      <path class="reference"
+        d="M650,410
+            618.72674,425.06040
+            611.00288,458.90083
+            632.64465,486.03875
+            667.35534,486.03875
+            688.99711,458.90083
+            681.27325,425.06040z"/>
+
+      <!-- Create the heptagon -->
+      <path class="result"
+        is="n-gon" cx="650" cy="450" r="40" vertex="7" density="6" />
+    </g>
+    <g>
+      <defs>Density of 7 (You got individual points) on a path</defs>
+
+      <!-- Reference view: The test is passing if no red is visible  -->
+      <path class="reference"
+        d="M750,410z
+           M781.27325,425.06040z
+           M788.99711,458.90083z
+           M767.35534,486.03875z
+           M732.64465,486.03875z
+           M711.00288,458.90083z
+           M718.72674,425.06040z"/>
+
+      <!-- Create the heptagon -->
+      <path class="result"
+        is="n-gon" cx="750" cy="450" r="40" vertex="7" density="7" />
+    </g>
+  </g>
+
+</svg>

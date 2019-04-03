@@ -1,0 +1,270 @@
+<svg viewBox="0 0 500 300"
+ xmlns="http://www.w3.org/2000/svg"
+ xmlns:xlink="http://www.w3.org/1999/xlink" >
+  <script href="../../svg-extend.js"></script>
+
+  <desc>
+  This test edge cases for the n-gon extended element
+
+  Note: polygon and polyline are not suited to handle euclidean polygons with a even number of vertex with a density greater than 1
+
+    * different behavior between path, polygon and polyline
+    * for density of 0, 2, 3, 4 and 5
+    * on a hexagram
+  </desc>
+
+  <style>
+    .reference { fill: none; stroke-linecap: round; stroke-width: 5px; stroke: red; }
+    .result    { fill: none; stroke-linecap: round; stroke-width: 6px; stroke: green; }
+  </style>
+
+  <g> <!-- PATH -->
+    <g>
+      <defs>Test applied on path element</defs>
+
+      <!-- Reference view: The test is passing if no red is visible  -->
+      <path class="reference"
+        d="M50,10z
+           M84.64101,30z
+           M84.64101,70z
+           M50,90z
+           M15.35898,70z
+           M15.35898,30z"/>
+
+      <!-- Create a pentagram -->
+      <path class="result"
+        is="n-gon" cx="50" cy="50" r="40" vertex="6" density="0" />
+    </g>
+    <g>
+      <defs>Test applied on path element</defs>
+
+      <!-- Reference view: The test is passing if no red is visible  -->
+      <path class="reference"
+        d="M150,10
+            184.64101,70
+            115.35898,70z
+           M184.64101,30
+            150,90
+            115.35898,30z"/>
+
+      <!-- Create a hexagram -->
+      <path class="result"
+        is="n-gon" cx="150" cy="50" r="40" vertex="6" density="2" />
+    </g>
+    <g>
+      <defs>Test applied on path element</defs>
+
+      <!-- Reference view: The test is passing if no red is visible  -->
+      <path class="reference"
+        d="M250,10
+            250,90z
+           M284.64101,30
+            215.35898,70z
+           M284.64101,70
+            215.35898,30z"/>
+
+      <!-- Create a hexagram -->
+      <path class="result"
+        is="n-gon" cx="250" cy="50" r="40" vertex="6" density="3" />
+    </g>
+    <g>
+      <defs>Test applied on path element</defs>
+
+      <!-- Reference view: The test is passing if no red is visible  -->
+      <path class="reference"
+        d="M350,10
+            315.35898,70
+            384.64101,70z
+           M384.64101,30
+            315.35898,30
+            350,90z"/>
+
+      <!-- Create a hexagram -->
+      <path class="result"
+        is="n-gon" cx="350" cy="50" r="40" vertex="6" density="4" />
+    </g>
+    <g>
+      <defs>Test applied on path element</defs>
+
+      <!-- Reference view: The test is passing if no red is visible  -->
+      <path class="reference"
+        d="M450,10
+            415.35898,30
+            415.35898,70
+            450,90
+            484.64101,70
+            484.64101,30z"/>
+
+      <!-- Create a hexagram -->
+      <path class="result"
+        is="n-gon" cx="450" cy="50" r="40" vertex="6" density="5" />
+    </g>
+  </g>
+
+  <g> <!-- POLYGON -->
+    <g>
+      <defs>Test applied on polygon element</defs>
+
+      <!-- Reference view: The test is passing if no red is visible  -->
+      <polygon class="reference"
+        points="50,110
+                84.64101,130
+                84.64101,170
+                50,190
+                15.35898,170
+                15.35898,130"/>
+
+      <!-- Create a pentagram -->
+      <polygon class="result"
+        is="n-gon" cx="50" cy="150" r="40" vertex="6" density="0" />
+    </g>
+    <g>
+      <defs>Test applied on polygon element</defs>
+
+      <!-- Reference view: The test is passing if no red is visible  -->
+      <polygon class="reference"
+        points="150,110
+                184.64101,170
+                115.35898,170
+                184.64101,130
+                150,190
+                115.35898,130"/>
+
+      <!-- Create a hexagram -->
+      <polygon class="result"
+        is="n-gon" cx="150" cy="150" r="40" vertex="6" density="2" />
+    </g>
+    <g>
+      <defs>Test applied on polygon element</defs>
+
+      <!-- Reference view: The test is passing if no red is visible  -->
+      <polygon class="reference"
+        points="250,110
+                250,190
+                284.64101,130
+                215.35898,170
+                284.64101,170
+                215.35898,130"/>
+
+      <!-- Create a hexagram -->
+      <polygon class="result"
+        is="n-gon" cx="250" cy="150" r="40" vertex="6" density="3" />
+    </g>
+    <g>
+      <defs>Test applied on polygon element</defs>
+
+      <!-- Reference view: The test is passing if no red is visible  -->
+      <polygon class="reference"
+        points="350,110
+                315.35898,170
+                384.64101,170
+                384.64101,130
+                315.35898,130
+                350,190"/>
+
+      <!-- Create a hexagram -->
+      <polygon class="result"
+        is="n-gon" cx="350" cy="150" r="40" vertex="6" density="4" />
+    </g>
+    <g>
+      <defs>Test applied on polygon element</defs>
+
+      <!-- Reference view: The test is passing if no red is visible  -->
+      <polygon class="reference"
+        points="450,110
+                415.35898,130
+                415.35898,170
+                450,190
+                484.64101,170
+                484.64101,130"/>
+
+      <!-- Create a hexagram -->
+      <polygon class="result"
+        is="n-gon" cx="450" cy="150" r="40" vertex="6" density="5" />
+    </g>
+  </g>
+
+  <g> <!-- POLYLINE -->
+    <g>
+      <defs>Test applied on polyline element</defs>
+
+      <!-- Reference view: The test is passing if no red is visible  -->
+      <polyline class="reference"
+        points="50,210
+                84.64101,230
+                84.64101,270
+                50,290
+                15.35898,270
+                15.35898,230"/>
+
+      <!-- Create a pentagram -->
+      <polyline class="result"
+        is="n-gon" cx="50" cy="250" r="40" vertex="6" density="0" />
+    </g>
+    <g>
+      <defs>Test applied on polyline element</defs>
+
+      <!-- Reference view: The test is passing if no red is visible  -->
+      <polyline class="reference"
+        points="150,210
+                184.64101,270
+                115.35898,270
+                184.64101,230
+                150,290
+                115.35898,230"/>
+
+      <!-- Create a hexagram -->
+      <polyline class="result"
+        is="n-gon" cx="150" cy="250" r="40" vertex="6" density="2" />
+    </g>
+    <g>
+      <defs>Test applied on polyline element</defs>
+
+      <!-- Reference view: The test is passing if no red is visible  -->
+      <polyline class="reference"
+        points="250,210
+                250,290
+                284.64101,230
+                215.35898,270
+                284.64101,270
+                215.35898,230"/>
+
+      <!-- Create a hexagram -->
+      <polyline class="result"
+        is="n-gon" cx="250" cy="250" r="40" vertex="6" density="3" />
+    </g>
+    <g>
+      <defs>Test applied on polyline element</defs>
+
+      <!-- Reference view: The test is passing if no red is visible  -->
+      <polyline class="reference"
+        points="350,210
+                315.35898,270
+                384.64101,270
+                384.64101,230
+                315.35898,230
+                350,290"/>
+
+      <!-- Create a hexagram -->
+      <polyline class="result"
+        is="n-gon" cx="350" cy="250" r="40" vertex="6" density="4" />
+    </g>
+    <g>
+      <defs>Test applied on polyline element</defs>
+
+      <!-- Reference view: The test is passing if no red is visible  -->
+      <polyline class="reference"
+        points="450,210
+                415.35898,230
+                415.35898,270
+                450,290
+                484.64101,270
+                484.64101,230"/>
+
+      <!-- Create a hexagram -->
+      <polyline class="result"
+        is="n-gon" cx="450" cy="250" r="40" vertex="6" density="5" />
+    </g>
+  </g>
+
+</svg>

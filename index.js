@@ -1,5 +1,6 @@
 import extendSVGElements from './lib/extendSVGElements.js'
-import star    from './lib/element.star.js'
+import ngon   from './lib/element.ngon.js'
+import star   from './lib/element.star.js'
 
 const ready =  new Promise(resolve => {
   if (
@@ -14,5 +15,6 @@ const ready =  new Promise(resolve => {
 
 // We preamptively initialized the library components
 ready.then(() => {
+  extendSVGElements(ngon)
   extendSVGElements(star)
 })
