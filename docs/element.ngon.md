@@ -25,7 +25,7 @@ vertex which gives a regular polygon:
 
 ![](img/polygon.svg)
 
-Larger density produce polygrams a.k.a stars:
+Larger densities produce polygrams a.k.a stars:
 
 ![](img/ngon.svg)
 
@@ -37,22 +37,23 @@ Larger density produce polygrams a.k.a stars:
 
 ## Declarative API
 
-In order to ease the pain of handling such computation, SVG Extend provide an
-extended declarative API for SVG elements `path`, `polygon` and `polyline` by
-defining new attributes on those elements:
+In order to ease the pain of computing vertex, *SVG Extend* provide an extended
+declarative API for SVG elements `path`, `polygon` and `polyline` by defining
+new attributes on those elements:
 
 | Attribute | Value              | Default | Min | Max |
 |:----------|--------------------|---------|-----|-----|
 | `is`      | `n-star`           | _None_  |     |     |
 | `cx`      | `-?[0-9]+`         | 0       | -∞  | +∞  |
 | `cy`      | `-?[0-9]+`         | 0       | -∞  | +∞  |
+| `r`       | `[0-9]+`           | 0       | 0   | +∞  |
 | `vertex`  | `[3-9][0-9]*`      | 3       | 3   | +∞  |
-| `r`       | `([0-9]+,)*[0-9]+` | 0       | 0   | +∞  |
+| `density` | `[0-9]+`           | 1       | 0   | +∞  |
 
 ### `is`
 
 The `is` attribute let declare that an element will use our extended API.
-It must have the value `n-star`.
+It must have the value `n-gon`.
 
 > **Note:** HTML defines the `is` attribute as a way to declare
 > [customized build-in elements](https://html.spec.whatwg.org/multipage/custom-elements.html#customized-built-in-element).
@@ -65,20 +66,33 @@ It must have the value `n-star`.
 
 ### `cx` and `cy`
 
-The `cx` and `cy` attribute define the centre of the circles to be used to draw
+The `cx` and `cy` attribute define the centre of the circle to be used to draw
 the shape. They behave exactly the same as those of the `circle` element. Their
 default value is `0`.
 
 ### `vertex`
 
-The number of vertex to distribute along each circle of the shape. Its minimum
+The number of vertex to distribute along the circle of the shape. Its minimum
 and default value is `3`.
 
 ### `r`
 
-A list of (comma or space separated) numbers representing the radius length of
-each circles used to draw the shape. Its default value is `0` (No shape will
-be drawn).
+The radius of the circles used to draw the shape. Its default value is `0`
+(No shape will be drawn).
+
+### `density`
+
+It defines the interval used to connect each vertex.
+
+> **Note:** On a path element, a value of `0` will disconnect the vertex,
+> making them individual dots. It's possible to materialize them with a
+> combination of `stroke`, `stroke-width` and `stroke-linecap` properties on
+> the element
+
+On `polyline` and `polygon`, because they are always defining a single
+path, some degenerative cases requiring multiple path can produce unexpected
+result (see the test [ngon.3.svg](https://github.com/JeremiePat/svg-extend/blob/master/tests/svg/star.1.svg))
+to get some examples)
 
 
 ## Examples
@@ -87,16 +101,16 @@ be drawn).
 
 ```xml
 <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-  <polygon is="n-star"
+  <path is="n-star"
     cx="50" cy="50" vertex="8" r="40" />
 </svg>
 ```
 
-### A five-pointed star
+### A nice octagram
 
 ```xml
 <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-  <polygon is="n-star"
-    cx="50" cy="50" vertex="5" r="40,20" />
+  <path is="n-star"
+    cx="50" cy="50" vertex="5" r="40" density="3" />
 </svg>
 ```
