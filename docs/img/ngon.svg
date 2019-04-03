@@ -1,0 +1,32 @@
+<svg viewBox="0 0 300 220"
+ xmlns="http://www.w3.org/2000/svg"
+ xmlns:xlink="http://www.w3.org/1999/xlink" >
+<script href="../../svg-extend.js"></script>
+<style>
+circle, line { fill: none; stroke: rgba(0, 0, 0, .25); }
+marker circle { fill: red; stroke: none; }
+path { fill: none; stroke: black; marker-mid:url(#dot); marker-end:url(#dot); }
+text { font: bold italic 6px serif; text-anchor: middle; }
+</style>
+
+  <marker id="dot" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5">
+    <circle cx="5" cy="5" r="4" />
+  </marker>
+
+  <g>
+    <text x="150" y="10">The 3 cases of octograms (from left to right: density of 2, 3 and 4)</text>
+
+    <path d="M50,20,90,60,50,100,10,60z M78.28427,31.71572,78.28427,88.28427,21.71572,88.28427,21.71572,31.71572z" />
+    <path d="M150,20,178.28427,88.28427,110,60,178.28427,31.71572,150,100,121.71572,31.71572,190,60,121.71572,88.28427z" />
+    <path d="M250,20,278.28427,88.28427,210,60,278.28427,31.71572,250,100,221.71572,31.71572,290,60,221.71572,88.28427z" />
+  </g>
+
+  <g>
+    <text x="150" y="120">The 3 cases of Enneagram (from left to right: density of 2, 3 and 4)</text>
+
+    <path d="M50,130,89.39231,163.05407,63.68080,207.58770,15.35898,190,24.28849,139.35822,75.71150,139.35822,84.64101,190,36.31919,207.58770,10.60768,163.05407z" />
+    <path d="M150,130,184.64101,190,115.35898,190z M175.71150,139.35822,163.68080,207.58770,110.60768,163.05407z M189.39231,163.05407,136.31919,207.58770,124.28849,139.35822z" />
+    <path d="M250,130,284.64101,190,215.35898,190z M275.71150,139.35822,263.68080,207.58770,210.60768,163.05407z M289.39231,163.05407,236.31919,207.58770,224.28849,139.35822z" />
+  </g>
+
+</svg>

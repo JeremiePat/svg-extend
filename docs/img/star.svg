@@ -1,0 +1,36 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+<style>
+circle, line { fill: none; stroke: rgba(0, 0, 0, .25); }
+marker circle { fill: red; stroke: none; }
+polygon { fill: none; stroke: black; }
+line, .angle { stroke: hsla(120deg, 60%, 40%, 0.5); stroke-width: 0.5px; }
+.angle { fill: hsla(120deg, 60%, 40%, 0.125) }
+text { font-size: 6px; fill: hsla(120deg, 40%, 25%, 1); }
+.small { font-size: 2.5px; }
+</style>
+
+  <marker id="dot" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5">
+    <circle cx="5" cy="5" r="4" />
+  </marker>
+
+  <circle cx="50" cy="50" r="40" />
+  <circle cx="50" cy="50" r="20" />
+
+  <line x1="50" y1="50" x2="50"       y2="0" />
+  <line x1="50" y1="50" x2="74"       y2="17" />
+  <line x1="50" y1="50" x2="97.55282" y2="34.54915" />
+  <line x1="50" y1="50" x2="79.38926" y2="90.45084" />
+  <line x1="50" y1="50" x2="20.61073" y2="90.45084" />
+  <line x1="50" y1="50" x2="02.44717" y2="34.54915" />
+  <circle cx="50" cy="50" r="12" class="angle" />
+
+  <text x="48"   y="60"  >𝜃</text>
+  <text x="40.5" y="55"  >𝜃</text>
+  <text x="43"   y="45.5">𝜃</text>
+  <text x="56.5" y="55"  >𝜃</text>
+
+  <text x="51" y="36" class="small">∆ = 𝜃/2</text>
+
+  <polygon points="50,10 38.24429,33.81966 11.95773,37.63932 30.97886,56.18033 26.48858,82.36067 50,70 73.51141,82.36067 69.02113,56.18033 88.04226,37.63932 61.75570,33.81966"
+    marker-start="url(#dot)" marker-mid="url(#dot)"  marker-end="url(#dot)" />
+</svg>

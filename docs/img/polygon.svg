@@ -1,0 +1,31 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+<style>
+circle, line { fill: none; stroke: rgba(0, 0, 0, .25); }
+marker circle { fill: red; stroke: none; }
+polygon { fill: none; stroke: black; }
+line, .angle { stroke: hsla(120deg, 60%, 40%, 0.5); stroke-width: 0.5px; }
+.angle { fill: hsla(120deg, 60%, 40%, 0.125) }
+text { font-size: 6px; fill: hsla(120deg, 40%, 25%, 1); }
+</style>
+
+  <marker id="dot" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5">
+    <circle cx="5" cy="5" r="4" />
+  </marker>
+
+  <circle cx="50" cy="50" r="40" />
+  <line x1="50" y1="50" x2="50"       y2="0" />
+  <line x1="50" y1="50" x2="97.55282" y2="34.54915" />
+  <line x1="50" y1="50" x2="79.38926" y2="90.45084" />
+  <line x1="50" y1="50" x2="20.61073" y2="90.45084" />
+  <line x1="50" y1="50" x2="02.44717" y2="34.54915" />
+  <circle cx="50" cy="50" r="15" class="angle" />
+
+  <text x="48" y="62">𝜃</text>
+  <text x="39" y="55">𝜃</text>
+  <text x="42" y="44">𝜃</text>
+  <text x="54" y="44">𝜃</text>
+  <text x="58" y="55">𝜃</text>
+
+  <polygon points="50,10 11.95773,37.63932 26.48858,82.36067 73.51141,82.36067 88.04226,37.63932"
+    marker-start="url(#dot)" marker-mid="url(#dot)"  marker-end="url(#dot)" />
+</svg>

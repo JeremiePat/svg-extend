@@ -9,8 +9,9 @@ The SVG Extend library provides a declarative API to easily create some basic
 shapes that are currently not part of the SVG specification:
 
 * Regular polygons and stars
-* _Spirales_ (WIP)
-* _Auto smooth lines and shape_ (TBD)
+* Euclidean regular polygons
+* _Spirals_ (WIP)
+* _Auto smooth lines and shapes_ (TBD)
 
 
 ## Installation
@@ -27,7 +28,6 @@ You can use your usual building tools and install the library through npm:
 > ES6 modules, the library is provided with a bundle (the `svg-extend.js` file)
 > that can be used out of the box in any browser.
 
-
 ### Compatibility
 
 The library has been tested with the following browsers:
@@ -37,6 +37,7 @@ The library has been tested with the following browsers:
 
 Once transpiled into ES5, it should be compatible with any browser supporting
 the `MutationObserver` API (which include IE11)
+
 
 ## Implementation notes
 
