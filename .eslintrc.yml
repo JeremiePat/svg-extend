@@ -8,7 +8,6 @@ env:
 
 extends: "standard"
 rules:
-  space-infix-ops: "off"
   no-multi-spaces: "off"
   key-spacing: "off"
   brace-style:
