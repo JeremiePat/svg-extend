@@ -112,6 +112,9 @@ import star from 'svg-extend/lib/element.star.js'
 // Enable the star extended element only
 // Feel free to create your own custom elements too
 extendSVGElements(star)
+
+// Note that extendSVGElements is asynchronous
+// and will be resolved only once the DOM is ready
 ```
 
 Build and call the resulting script in your HTML document:

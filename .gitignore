@@ -1,3 +1,5 @@
 tests/backstop
 tests/debug.html
 node_modules
+docs/Gemfile*
+docs/_site
