@@ -3,7 +3,7 @@ layout: default
 title: Home
 nav_order: 1
 description: SVG Extend is an experiment to find ways to make SVG smarter and more usable/lovable by web authors.
-permalink: /
+permalink: '/'
 ---
 # SVG Extend
 {: .fs-9 }

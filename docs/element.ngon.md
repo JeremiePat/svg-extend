@@ -29,10 +29,11 @@ Larger densities produce polygrams a.k.a stars:
 
 ![](img/ngon.svg)
 
-> **Note:** There are some debates on the mathematician community about
+> **Note:** *There are some debates on the mathematician community about
 > [how some "degenerate" cases of polygram should be actually handled](https://en.wikipedia.org/wiki/Regular_polygon#Regular_star_polygons).
 > In order to produce results that are more visually appealing, we are
-> following the Coxeter convention.
+> following the Coxeter convention.*
+{: .fs-3 }
 
 
 ## Declarative API
@@ -52,17 +53,18 @@ new attributes on those elements:
 
 ### `is`
 
-The `is` attribute let declare that an element will use our extended API.
+The `is` attribute indicates that an element will use our extended API.
 It must have the value `n-gon`.
 
-> **Note:** HTML defines the `is` attribute as a way to declare
+> **Note:** *HTML defines the `is` attribute as a way to declare
 > [customized build-in elements](https://html.spec.whatwg.org/multipage/custom-elements.html#customized-built-in-element).
 > As [the whole Custom Elements specification doesn't apply to SVG](https://github.com/w3c/webcomponents/issues/634),
 > we use it as a bet on the future of the spec. If the spec support SVG at some
 > point, we will be able to switch our implementation without changing the
 > declarative API. If the spec never embrace SVG, then, it is a nice way to
 > have a consistent API between HTML and SVG, even if the implementation
-> is different.
+> is different.*
+{: .fs-3 }
 
 ### `cx` and `cy`
 
@@ -84,10 +86,11 @@ The radius of the circles used to draw the shape. Its default value is `0`
 
 It defines the interval used to connect each vertex.
 
-> **Note:** On a path element, a value of `0` will disconnect the vertex,
+> **Note:** *On a path element, a value of `0` will disconnect the vertex,
 > making them individual dots. It's possible to materialize them with a
 > combination of `stroke`, `stroke-width` and `stroke-linecap` properties on
-> the element
+> the element*
+{: .fs-3 }
 
 On `polyline` and `polygon`, because they are always defining a single
 path, some degenerative cases requiring multiple path can produce unexpected

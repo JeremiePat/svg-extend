@@ -40,9 +40,11 @@ computing the associated vertex in a cartesian coordinate system such as SVG
 can be tricky. It involves some trigonometry mathematics to handle the
 computation and many people aren't at ease with such mathematics.
 
-> **Note:** The way we are defining stars here doesn't comply with the
-> definition of euclidian stars which are [non-convex regular polygon](https://en.wikipedia.org/wiki/Regular_polygon#Regular_star_polygons).
-> See our alternative to make [euclidian polygons]({{ site.baseurl }}{% link element.ngon.md %})
+> **Note:** *The way we are defining stars here doesn't comply with the
+> definition of euclidian stars which must be
+> [equiangular and equilateral non-convex polygon](https://en.wikipedia.org/wiki/Regular_polygon#Regular_star_polygons).
+> See our alternative to make [euclidian polygons]({{ site.baseurl }}{% link element.ngon.md %}).*
+{: .fs-3 }
 
 
 ## Declarative API
@@ -64,14 +66,15 @@ by defining new attributes on those elements:
 The `is` attribute let declare that an element will use our extended API.
 It must have the value `n-star`.
 
-> **Note:** HTML defines the `is` attribute as a way to declare
+> **Note:** *HTML defines the `is` attribute as a way to declare
 > [customized build-in elements](https://html.spec.whatwg.org/multipage/custom-elements.html#customized-built-in-element).
 > As [the whole Custom Elements specification doesn't apply to SVG](https://github.com/w3c/webcomponents/issues/634),
 > we use it as a bet on the future of the spec. If the spec support SVG at some
 > point, we will be able to switch our implementation without changing the
 > declarative API. If the spec never embrace SVG, then, it is a nice way to
 > have a consistent API between HTML and SVG, even if the implementation
-> is different.
+> is different.*
+{: .fs-3 }
 
 ### `cx` and `cy`
 
