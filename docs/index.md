@@ -26,6 +26,7 @@ As of now, *SVG Extend* extends some elements to ease creating some
 basic shapes:
 
   * [Regular polygons and stars]({{ site.baseurl }}{% link element.star.md %})
+  * [Euclidean polygons]({{ site.baseurl }}{% link element.ngon.md %})
 
 Here is a unordered, open, list of what we plan for the future:
 
