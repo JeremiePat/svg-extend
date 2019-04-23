@@ -9,8 +9,8 @@ permalink: /svg-known-issues
 
 SVG as some known issues that worth knowing when using it as it can require
 some tricky workarounds to deal with them. *SVG Extend* doesn't plan to fix
-them nor to provide workarounds but we document them here in order to better
-know what difficulties we are facing.
+them nor to provide workarounds but we document those issues here in order to
+better know what difficulties we are facing.
 
 ## No EcmaScript modules with SVG
 
@@ -27,19 +27,19 @@ your modules into a single file (for example with [WebPack](https://webpack.js.o
 [Google Chrome doesn't support the CSS property `backface-visibility` on SVG
 elements](https://bugs.chromium.org/p/chromium/issues/detail?id=954501). This
 is due to the lack of some compositing mechanics for SVG within Google Chrome.
-There is no easy fix for that as it requires to fully rework Google Chrome
-implementation of SVG.
+There is no easy fix for that as it requires to rework the whole Google Chrome
+SVG implementation.
 
 This lack of support has an impact when using CSS transforms. As
-`backface-visibility` isn't supported, a 180deg rotation on the x or y axis
-will flip a shape instead of hiding it. If this is the intended purpose, A
+`backface-visibility` isn't supported, a `180deg` rotation on the _x_ or _y_
+axis will flip a shape instead of hiding it. If this is the intended purpose, A
 possible workaround consist in limiting rotation to 90deg. This can be tricky
 when dealing with animation as it requires to think animation that are somewhat
 shorter than expected and with side effects on easing.
 
 ## No `customElement` API
 
-As per the spec, [the `customElement` API only apply to HTML content](https://html.spec.whatwg.org/multipage/custom-elements.html#custom-elements-core-concepts).
-SVG has been put [out of scope on purpose](https://github.com/w3c/webcomponents/issues/634).
-This is a spec issue with due to a lack of commitment from implementors (See
+As per the spec, the `customElement` API only apply to HTML content. SVG has
+been put [out of scope on purpose](https://github.com/w3c/webcomponents/issues/634).
+This is a spec issue due to a lack of commitment from implementors (See
 [this tweet for a possible way to convince implementors to get into it](https://twitter.com/annevk/status/1107973506854256640)).
