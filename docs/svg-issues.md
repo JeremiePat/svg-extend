@@ -37,6 +37,13 @@ possible workaround consist in limiting rotation to 90deg. This can be tricky
 when dealing with animation as it requires to think animation that are somewhat
 shorter than expected and with side effects on easing.
 
+## CSS Gradients (and other CSS image functions)
+
+As per the SVG spec, [CSS gradients cannot be used as paint server](https://svgwg.org/svg2-draft/painting.html#SpecifyingPaint)
+for `fill` and `stroke`. This is mainly due to some
+[sizing computation issues between CSS and SVG](https://github.com/w3c/svgwg/issues/167)
+specs that needs to be resolved.
+
 ## No `customElement` API
 
 As per the spec, the `customElement` API only apply to HTML content. SVG has
