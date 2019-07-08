@@ -50,3 +50,12 @@ As per the spec, the `customElement` API only apply to HTML content. SVG has
 been put [out of scope on purpose](https://github.com/w3c/webcomponents/issues/634).
 This is a spec issue due to a lack of commitment from implementors (See
 [this tweet for a possible way to convince implementors to get into it](https://twitter.com/annevk/status/1107973506854256640)).
+
+
+## Remote ressources
+
+[Chrome](https://bugs.chromium.org/p/chromium/issues/detail?id=109212), [Safari](https://bugs.webkit.org/show_bug.cgi?id=65344) and IE11 do not apply distant paint servers. (IE11 also fail at displaying remote elements with the `<use>` element)
+
+It also appears that Chrome, Safari and Firefox does not apply stylesheets that are part of the `<use>` shadow tree to elements of that same shadow tree.
+
+For more details see [this full tests suite](tests/use-and-paint).

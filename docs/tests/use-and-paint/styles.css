@@ -1,0 +1,272 @@
+* { box-sizing: border-box; }
+
+body {
+  padding: 2rem;
+  margin: 0;
+  font: 1rem sans-serif;
+  background: white;
+  counter-reset: h1;
+}
+
+header > p {
+  max-width: 40rem;
+}
+
+code {
+  display: inline-block;
+  background: #EFEFEF;
+  white-space: nowrap;
+  font: 0.85em/1em monospace;
+  padding: 0 0.2em;
+}
+
+h1 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+h1::before {
+  counter-increment: h1;
+  content: counter(h1) ". ";
+}
+
+h2 {
+  margin: 1.5rem 0 0;
+  font-size: 1rem;
+  font-variant: small-caps;
+}
+
+h2::before {
+  counter-increment: h2;
+  content: counter(h1) "." counter(h2) ". ";
+}
+
+section {
+  counter-reset: h2;
+}
+
+section > header {
+  margin: 2rem 0;
+  padding: 2rem 0;
+  border-top: 1px solid grey;
+  border-bottom: 1px solid grey;
+}
+
+article > header p{
+  font: italic 0.85rem sans-serif;
+}
+
+article > footer p {
+  font-size: 0.85rem;
+}
+
+article > footer {
+  max-width: 40rem;
+  padding: 0.5rem;
+  border: 2px solid darkgray;
+  background: #EFEFEF;
+  border-radius: 0.5rem;
+}
+
+article > footer :last-child {
+  margin-bottom: 0;
+}
+
+p {
+  max-width: 40rem;
+  margin: 0 0 1rem 0;
+}
+
+h1 + p,
+h2 + p {
+  margin: 0;
+}
+
+.code {
+  padding: 1rem;
+  margin: 0.5rem 0;
+  border: 1px dashed rgba(0,0,0,0.25);
+  display: flex;
+  /* flex-flow: row wrap; */
+}
+
+figure {
+  position: relative;
+  display: inline-block;
+  margin: 0 0 0 2.5rem;
+  padding: 1rem;
+  border: 1px solid black;
+  border-radius: .5rem;
+}
+
+.broken {
+  color: red;
+}
+
+figure.broken {
+  border-color: maroon;
+  color: grey;
+}
+
+figure.broken figcaption {
+  color: maroon;
+}
+
+figure:before {
+  content: '←';
+  position: absolute;
+  left: -2rem;
+  top: 0.1rem;
+  font-size: 2rem;
+}
+
+figure.broken:before {
+  content: '⇠';
+  color: red;
+  /* left: -1.8rem; */
+}
+
+figcaption {
+  position: absolute;
+  background: white;
+  left: 0.75rem;
+  top: -0.6rem;
+  padding: 0 0.25rem;
+  font: italic 0.8rem Verdana, sans-serif;
+}
+
+iframe {
+  width:  100px;
+  height: 100px;
+  border: none;
+}
+
+pre {
+  font: 0.85rem monospace;
+  margin: 0;
+}
+
+.result {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.5rem;
+}
+
+.result li {
+  display: inline-block;
+  border: 1px solid grey;
+  border-radius: 0.25rem;
+  padding: 0.35rem 0.4rem 0.15rem;
+}
+
+.result li:before {
+  content: '? ';
+  color: grey;
+}
+
+.result li[title=Pass] {
+  border: 2px solid green;
+}
+.result li[title=Pass]:before {
+  content: '✓ ';
+  font-size: 0.8rem;
+  color: green;
+}
+
+.result li[title=Warning] {
+  border: 2px solid goldenrod;
+}
+.result li[title=Warning]:before {
+  content: '⚠ ';
+  font-size: 0.8rem;
+  color: goldenrod;
+  transform: translateY(-0.1rem);
+  display: inline-block;
+  padding: 0 0.2rem 0 0;
+}
+
+.result li[title=Fail] {
+  border: 2px solid red;
+}
+.result li[title=Fail]:before {
+  content: '✕ ';
+  font-size: 0.8rem;
+  color: red;
+  transform: translateY(-0.1rem);
+  display: inline-block;
+  padding: 0 0.2rem 0 0;
+}
+
+nav {
+  border: 2px solid darkgray;
+  border-radius: 0.5rem;
+
+  font: 0.85rem/1.4 sans-serif;
+
+  position: fixed;
+  top: 2rem;
+  right: 2rem;
+  z-index: 1;
+
+  max-height: 4rem;
+  max-width:  4rem;
+  overflow: hidden;
+  cursor: pointer;
+
+  counter-reset: altH1;
+
+  background-color: #EFEFEF;
+  background-image: url('data:image/svg+xml;charset=utf-8,<svg viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><rect opacity=".3" x="2" y="2" width="8" height="2" /><rect opacity=".3" x="2" y="5" width="8" height="2" /><rect opacity=".3" x="2" y="8" width="8" height="2" /></svg>');
+
+  background-size: calc(4rem - 4px);;
+  background-position: top right;
+  background-repeat: no-repeat;
+
+  transition: all 300ms;
+}
+
+nav:focus-within {
+  max-height: calc(100vh - 4rem);
+  max-width:  calc(100vw - 4rem);
+  overflow: auto;
+  cursor: default;
+  background-image: none;
+}
+
+nav:focus-within ol {
+  opacity: 1;
+  pointer-events: all;
+}
+
+nav ol {
+  transition: opacity 300ms;
+  opacity: 0;
+  pointer-events: none;
+  list-style: none;
+  margin: 0;
+  padding: 1rem;
+}
+
+nav .h1 {
+  font-weight: bold;
+  margin-top: 0.5rem;
+  counter-reset: altH2;
+}
+
+nav .h1:first-child {
+  margin: 0;
+}
+
+nav .h2 {
+  margin-left: 1rem;
+}
+
+nav .h1::before {
+  counter-increment: altH1;
+  content: counter(altH1) ". ";
+}
+
+nav .h2::before {
+  counter-increment: altH2;
+  content: counter(altH1) "." counter(altH2) ". ";
+}

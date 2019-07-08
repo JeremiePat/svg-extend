@@ -1,0 +1,1141 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>SVG remote ressources tests</title>
+<link rel="stylesheet" href="styles.css">
+<script src="scripts.js"></script>
+
+<header>
+<p>While SVG allows to load and use remote ressources (either graphic elements or paint servers), the current state of implementation is kind of messy. This little playground intent to try to figure how things actually work and how things fit with the SVG specification.</p>
+
+<p><strong>NOTE:</strong> <em>All the following code samples assume a view box equal to <code>0 0 100 100</code>. It is also assumed that remote ressources are loaded from the same origin (<a href="https://github.com/w3c/svgwg/issues/707" target="_blank">Cross-Origin is out of scope as it has to be solved at the spec level</a>)</em></p>
+</header>
+
+<main>
+
+<!-- Local references -->
+<section>
+<header>
+  <h1>Local references</h1>
+  <p>All these tests check the bevior of local references for solid color and paint servers</p>
+</header>
+
+<article>
+  <header>
+    <h2>Local reference: fill attribute</h2>
+    <p>We just make sure that using the fill attribute with a solid color is working</p>
+  </header>
+
+  <div class="code">
+    <iframe src="base_reference/inline/base.svg"></iframe>
+
+    <figure class="file">
+<pre>&lt;circle
+  cx="50" cy="50" r="40"
+  <strong>fill="green"</strong> /&gt;</pre>
+      <figcaption><a href="base_reference/inline/base.svg" target="_blank">base.svg</a></figcaption>
+    </figure>
+  </div>
+
+  <ul class="result">
+    <li title="Pass">Chrome</li>
+    <li title="Pass">Firefox</li>
+    <li title="Pass">Safari</li>
+    <li title="Pass">Edge</li>
+    <li title="Pass">IE11</li>
+  </ul>
+</article>
+
+<article>
+  <header>
+    <h2>Local reference: fill property</h2>
+    <p>We just make sure that using the CSS fill property with a solid color is working</p>
+  </header>
+
+  <div class="code">
+    <iframe src="base_reference/style/base.svg"></iframe>
+
+    <figure class="file">
+<pre>&lt;style&gt;
+circle {
+  <strong>fill: green;</strong>
+}
+&lt;/style&gt;
+
+&lt;circle
+  cx="50" cy="50" r="40"/&gt;</pre>
+      <figcaption><a href="base_reference/style/base.svg" target="_blank">base.svg</a></figcaption>
+    </figure>
+  </div>
+
+  <ul class="result">
+    <li title="Pass">Chrome</li>
+    <li title="Pass">Firefox</li>
+    <li title="Pass">Safari</li>
+    <li title="Pass">Edge</li>
+    <li title="Pass">IE11</li>
+  </ul>
+</article>
+
+<article>
+  <header>
+    <h2>Local reference: fill attribute with a paint server</h2>
+    <p>We just make sure that using the fill attribute with a paint server is working</p>
+  </header>
+
+  <div class="code">
+    <iframe src="base_reference/inline/paint/base.svg"></iframe>
+
+    <figure class="file">
+<pre>&lt;radialGradient <strong>id="#gradient"</strong>&gt;
+  &lt;stop offset="0%" stop-color="green" /&gt;
+&lt;/radialGradient&gt;
+
+&lt;circle
+  cx="50" cy="50" r="40"
+  <strong>fill="url(#gradient)"</strong> /&gt;</pre>
+      <figcaption><a href="base_reference/inline/paint/base.svg" target="_blank">base.svg</a></figcaption>
+    </figure>
+  </div>
+
+  <ul class="result">
+    <li title="Pass">Chrome</li>
+    <li title="Pass">Firefox</li>
+    <li title="Pass">Safari</li>
+    <li title="Pass">Edge</li>
+    <li title="Pass">IE11</li>
+  </ul>
+</article>
+
+<article>
+  <header>
+    <h2>Local reference: fill property with a paint server</h2>
+    <p>We just make sure that using the CSS fill property with a paint server is working</p>
+  </header>
+
+  <div class="code">
+    <iframe src="base_reference/style/paint/base.svg"></iframe>
+
+    <figure class="file">
+<pre>&lt;radialGradient <strong>id="gradient"</strong>&gt;
+  &lt;stop offset="0%" stop-color="green" /&gt;
+&lt;/radialGradient&gt;
+
+&lt;style&gt;
+  circle {
+    <strong>fill: url(#gradient);</strong>
+  }
+&lt;/style&gt;
+
+&lt;circle
+  cx="50" cy="50" r="40"/&gt;</pre>
+      <figcaption><a href="base_reference/style/paint/base.svg" target="_blank">base.svg</a></figcaption>
+    </figure>
+  </div>
+
+  <ul class="result">
+    <li title="Pass">Chrome</li>
+    <li title="Pass">Firefox</li>
+    <li title="Pass">Safari</li>
+    <li title="Pass">Edge</li>
+    <li title="Pass">IE11</li>
+  </ul>
+</article>
+</section>
+
+<!-- Remote paint server -->
+<section>
+<header>
+  <h1>Remote paint server</h1>
+  <p>All these tests check how browsers handle remote paint server</p>
+</header>
+
+<article>
+  <header>
+    <h2>Remote paint server: fill attribute</h2>
+    <p>We apply a remote paint server through a fill attribute.</p>
+  </header>
+
+  <div class="code">
+    <iframe src="paint_remote/inline/base.svg"></iframe>
+
+    <figure class="file">
+<pre>&lt;circle
+  cx="50" cy="50" r="40"
+  <strong class="broken">fill="url(paint.svg#gradient)"</strong> /&gt;</pre>
+      <figcaption><a href="paint_remote/inline/base.svg" target="_blank">base.svg</a></figcaption>
+    </figure>
+
+    <figure class="file broken">
+<pre>&lt;radialGradient id="gradient"&gt;
+  &lt;stop offset="0%" stop-color="green" /&gt;
+&lt;/radialGradient&gt;</pre>
+      <figcaption><a href="paint_remote/inline/paint.svg" target="_blank">paint.svg</a></figcaption>
+    </figure>
+  </div>
+
+  <ul class="result">
+    <li title="Fail">Chrome</li>
+    <li title="Pass">Firefox</li>
+    <li title="Fail">Safari</li>
+    <li title="Unknown">Edge</li>
+    <li title="Fail">IE11</li>
+  </ul>
+
+  <footer><a href="https://bugs.chromium.org/p/chromium/issues/detail?id=109212" target="_blank">Chrome</a> and <a href="https://bugs.webkit.org/show_bug.cgi?id=65344" target="_blank">Safari</a> don't load remote paint servers, even if they are from the same origin. Interrestingly enough, Chrome fallback to <code>transparent</code> where Safari and IE11 fallback to <code>black</code> for rendering the element.</footer>
+</article>
+
+<article>
+  <header>
+    <h2>Remote paint server: fill property</h2>
+    <p>We apply a remote paint server through a CSS fill property.</p>
+  </header>
+
+  <div class="code">
+    <iframe src="paint_remote/style/base.svg"></iframe>
+
+    <figure class="file">
+<pre>&lt;style&gt;
+  circle {
+    <strong class="broken">fill: url(paint.svg#gradient);</strong>
+  }
+&lt;/style&gt;
+
+&lt;circle
+  cx="50" cy="50" r="40"/&gt;</pre>
+      <figcaption><a href="paint_remote/style/base.svg" target="_blank">base.svg</a></figcaption>
+    </figure>
+
+    <figure class="file broken">
+<pre>&lt;radialGradient id="gradient"&gt;
+  &lt;stop offset="0%" stop-color="green" /&gt;
+&lt;/radialGradient&gt;</pre>
+      <figcaption><a href="paint_remote/style/paint.svg" target="_blank">paint.svg</a></figcaption>
+    </figure>
+  </div>
+
+  <ul class="result">
+    <li title="Fail">Chrome</li>
+    <li title="Pass">Firefox</li>
+    <li title="Fail">Safari</li>
+    <li title="Unknown">Edge</li>
+    <li title="Fail">IE11</li>
+  </ul>
+
+  <footer><a href="https://bugs.chromium.org/p/chromium/issues/detail?id=109212" target="_blank">Chrome</a> and <a href="https://bugs.webkit.org/show_bug.cgi?id=65344" target="_blank">Safari</a> don't load remote paint servers, even if they are from the same origin. Interrestingly enough, Chrome fallback to <code>transparent</code> where Safari and IE11 fallback to <code>black</code> for rendering the element.</footer>
+</article>
+</section>
+
+<!-- Use reference -->
+<section>
+<header>
+  <h1>Using local graphic elements</h1>
+  <p>All these tests check how browsers handle <code>&lt;use&gt;</code> with local references</p>
+</header>
+
+<article>
+  <header>
+    <h2>Local graphic: fill attribute</h2>
+    <p>We use a local graphic element colored with a fill attribute</p>
+  </header>
+
+  <div class="code">
+    <iframe src="use_base/inline/base.svg"></iframe>
+
+    <figure class="file">
+<pre>&lt;defs&gt;
+  &lt;circle <strong>id="circle"</strong>
+    cx="50" cy="50" r="40"
+    <strong>fill="green"</strong> /&gt;
+&lt;/defs&gt;
+
+&lt;use <strong>xlink:href="#circle"</strong> /&gt;</pre>
+      <figcaption><a href="use_base/inline/base.svg" target="_blank">base.svg</a></figcaption>
+    </figure>
+  </div>
+
+  <ul class="result">
+    <li title="Pass">Chrome</li>
+    <li title="Pass">Firefox</li>
+    <li title="Pass">Safari</li>
+    <li title="Pass">Edge</li>
+    <li title="Pass">IE11</li>
+  </ul>
+</article>
+
+<article>
+  <header>
+    <h2>Local graphic: fill attribute (with a paint server)</h2>
+    <p>We use a local graphic element with a fill attribute referencing a paint server</p>
+  </header>
+
+  <div class="code">
+    <iframe src="use_base/inline/paint/base.svg"></iframe>
+
+    <figure class="file">
+<pre>&lt;defs&gt;
+  &lt;radialGradient <strong>id="gradient"</strong>&gt;
+    &lt;stop offset="0%" stop-color="green" /&gt;
+  &lt;/radialGradient&gt;
+
+  &lt;circle <strong>id="circle"</strong>
+    cx="50" cy="50" r="40"
+    <strong>fill="url(#gradient)"</strong> /&gt;
+&lt;/defs&gt;
+
+&lt;use <strong>xlink:href="#circle"</strong> /&gt;</pre>
+      <figcaption><a href="use_base/inline/paint/base.svg" target="_blank">base.svg</a></figcaption>
+    </figure>
+  </div>
+
+  <ul class="result">
+    <li title="Pass">Chrome</li>
+    <li title="Pass">Firefox</li>
+    <li title="Pass">Safari</li>
+    <li title="Pass">Edge</li>
+    <li title="Pass">IE11</li>
+  </ul>
+</article>
+
+<article>
+  <header>
+    <h2>Local graphic: fill property</h2>
+    <p>We use a local graphic element colored with a CSS fill property</p>
+  </header>
+
+  <div class="code">
+    <iframe src="use_base/style/base.svg"></iframe>
+
+    <figure class="file">
+<pre>&lt;style&gt;
+  circle {
+    <strong>fill: green;</strong>
+  }
+&lt;/style&gt;
+
+&lt;defs&gt;
+  &lt;circle <strong>id="circle"</strong>
+    cx="50" cy="50" r="40" /&gt;
+&lt;/defs&gt;
+
+&lt;use <strong>xlink:href="#circle"</strong> /&gt;</pre>
+      <figcaption><a href="use_base/style/base.svg" target="_blank">base.svg</a></figcaption>
+    </figure>
+  </div>
+
+  <ul class="result">
+    <li title="Pass">Chrome</li>
+    <li title="Pass">Firefox</li>
+    <li title="Pass">Safari</li>
+    <li title="Pass">Edge</li>
+    <li title="Pass">IE11</li>
+  </ul>
+</article>
+
+<article>
+  <header>
+    <h2>Local graphic: fill property (with a paint server)</h2>
+    <p>We use a local graphic element colored with a CSS fill property referencing a paint server</p>
+  </header>
+
+  <div class="code">
+    <iframe src="use_base/style/paint/base.svg"></iframe>
+
+    <figure class="file">
+<pre>&lt;style&gt;
+  circle {
+    <strong>fill: url(#gradient);</strong>
+  }
+&lt;/style&gt;
+
+&lt;defs&gt;
+  &lt;radialGradient <strong>id="gradient"</strong>&gt;
+    &lt;stop offset="0%" stop-color="green" /&gt;
+  &lt;/radialGradient&gt;
+
+  &lt;circle <strong>id="circle"</strong>
+    cx="50" cy="50" r="40" /&gt;
+&lt;/defs&gt;
+
+&lt;use <strong>xlink:href="#circle"</strong> /&gt;</pre>
+      <figcaption><a href="use_base/style/paint/base.svg" target="_blank">base.svg</a></figcaption>
+    </figure>
+  </div>
+
+  <ul class="result">
+    <li title="Pass">Chrome</li>
+    <li title="Pass">Firefox</li>
+    <li title="Pass">Safari</li>
+    <li title="Pass">Edge</li>
+    <li title="Pass">IE11</li>
+  </ul>
+</article>
+</section>
+
+<!-- Remote use -->
+<section>
+<header>
+  <h1>Using remote graphic elements</h1>
+  <p>All these tests check how browsers handle <code>&lt;use&gt;</code> with remote references</p>
+</header>
+
+<article>
+  <header>
+    <h2>Remote graphic: fill attribute</h2>
+    <p>We use a remote graphic element colored with a fill attribute</p>
+  </header>
+
+  <div class="code">
+    <iframe src="use_graphic/inline/base.svg"></iframe>
+
+    <figure class="file">
+<pre>&lt;use <strong>xlink:href="graphic.svg#circle"</strong> /&gt;</pre>
+      <figcaption><a href="use_graphic/inline/base.svg" target="_blank">base.svg</a></figcaption>
+    </figure>
+
+    <figure class="file">
+<pre>&lt;circle <strong>id="circle"</strong>
+  cx="50" cy="50" r="40"
+<strong>fill="green"</strong> /&gt;</pre>
+      <figcaption><a href="use_graphic/inline/graphic.svg" target="_blank">graphic.svg</a></figcaption>
+    </figure>
+  </div>
+
+  <ul class="result">
+    <li title="Pass">Chrome</li>
+    <li title="Pass">Firefox</li>
+    <li title="Pass">Safari</li>
+    <li title="Unknown">Edge</li>
+    <li title="Fail">IE11</li>
+  </ul>
+</article>
+
+<article>
+  <header>
+    <h2>Remote graphic: fill attribute (with a paint server)</h2>
+    <p>We use a remote graphic element colored with a fill attribute referencing a paint server</p>
+  </header>
+
+  <div class="code">
+    <iframe src="use_graphic/inline/paint/base.svg"></iframe>
+
+    <figure class="file">
+<pre>&lt;use <strong>xlink:href="graphic.svg#circle"</strong> /&gt;</pre>
+      <figcaption><a href="use_graphic/inline/paint/base.svg" target="_blank">base.svg</a></figcaption>
+    </figure>
+
+    <figure class="file">
+<pre>&lt;radialGradient <strong>id="gradient"</strong>&gt;
+  &lt;stop offset="0%" stop-color="green" /&gt;
+&lt;/radialGradient&gt;
+
+&lt;circle <strong>id="circle"</strong>
+  cx="50" cy="50" r="40"
+<strong>fill="url(#gradient)"</strong> /&gt;</pre>
+      <figcaption><a href="use_graphic/inline/paint/graphic.svg" target="_blank">graphic.svg</a></figcaption>
+    </figure>
+  </div>
+
+  <ul class="result">
+    <li title="Fail">Chrome</li>
+    <li title="Pass">Firefox</li>
+    <li title="Fail">Safari</li>
+    <li title="Unknown">Edge</li>
+    <li title="Fail">IE11</li>
+  </ul>
+</article>
+
+<article>
+  <header>
+    <h2>Remote graphic: fill attribute (with a paint server embedded within the shadow tree)</h2>
+    <p>We use a remote graphic element colored with a fill attribute referencing a paint server</p>
+  </header>
+
+  <div class="code">
+    <iframe src="use_graphic/inline/embed/base.svg"></iframe>
+
+    <figure class="file">
+<pre>&lt;use <strong>xlink:href="graphic.svg#circle"</strong> /&gt;</pre>
+      <figcaption><a href="use_graphic/inline/embed/base.svg" target="_blank">base.svg</a></figcaption>
+    </figure>
+
+    <figure class="file">
+<pre>&lt;g <strong>id="circle"</strong>&gt;
+  &lt;radialGradient <strong>id="gradient"</strong>&gt;
+    &lt;stop offset="0%" stop-color="green" /&gt;
+  &lt;/radialGradient&gt;
+
+  &lt;circle
+    cx="50" cy="50" r="40"
+  <strong>fill="url(#gradient)"</strong> /&gt;
+&lt;/g&gt;</pre>
+      <figcaption><a href="use_graphic/inline/embed/graphic.svg" target="_blank">graphic.svg</a></figcaption>
+    </figure>
+  </div>
+
+  <ul class="result">
+    <li title="Fail">Chrome</li>
+    <li title="Pass">Firefox</li>
+    <li title="Fail">Safari</li>
+    <li title="Unknown">Edge</li>
+    <li title="Fail">IE11</li>
+  </ul>
+</article>
+
+<article>
+  <header>
+    <h2>Remote graphic: CSS fill property</h2>
+    <p>We use a remote graphic element colored with a CSS fill property</p>
+  </header>
+
+  <div class="code">
+    <iframe src="use_graphic/style/base.svg"></iframe>
+
+    <figure class="file">
+<pre>&lt;use <strong>xlink:href="graphic.svg#circle"</strong> /&gt;</pre>
+      <figcaption><a href="use_graphic/style/base.svg" target="_blank">base.svg</a></figcaption>
+    </figure>
+
+    <figure class="file">
+<pre>&lt;style&gt;
+  circle {
+    <strong>fill: green;</strong>
+  }
+&lt;/style&gt;
+
+&lt;circle <strong>id="circle"</strong>
+  cx="50" cy="50" r="40" /&gt;</pre>
+      <figcaption><a href="use_graphic/style/graphic.svg" target="_blank">graphic.svg</a></figcaption>
+    </figure>
+  </div>
+
+  <ul class="result">
+    <li title="Warning">Chrome</li>
+    <li title="Warning">Firefox</li>
+    <li title="Warning">Safari</li>
+    <li title="Unknown">Edge</li>
+    <li title="Fail">IE11</li>
+  </ul>
+
+  <footer>
+    <p>Chrome, Firefox and Safari display the element without any style applied (IE11 fail at displaying anything). Should styles from the remote document apply to duplicate elements within the host <code>&lt;use&gt;</code> Shadow tree ? The spec is ambigous in that matter as it states that : <a href="https://svgwg.org/svg2-draft/struct.html#UseElement"><q>[…] all style rules that apply in the scope of the referenced element also apply in the scope of the cloned shadow tree</q></a>. It is unclear if it is valid for local elements only or if it includes remote elements as well. <em>IMO in that case, the current behavior (no style) is the right one.</em></p>
+  </footer>
+</article>
+
+<article>
+  <header>
+    <h2>Remote graphic: CSS fill property (with a paint server)</h2>
+    <p>We use a remote graphic element colored with a CSS fill property referencing a paint server</p>
+  </header>
+
+  <div class="code">
+    <iframe src="use_graphic/style/paint/base.svg"></iframe>
+
+    <figure class="file">
+<pre>&lt;use <strong>xlink:href="graphic.svg#circle"</strong> /&gt;</pre>
+      <figcaption><a href="use_graphic/style/paint/base.svg" target="_blank">base.svg</a></figcaption>
+    </figure>
+
+    <figure class="file">
+<pre>&lt;radialGradient <strong>id="gradient"</strong>&gt;
+  &lt;stop offset="0%" stop-color="green" /&gt;
+&lt;/radialGradient&gt;
+
+&lt;style&gt;
+  circle {
+    <strong>fill: url(#gradient);</strong>
+  }
+&lt;/style&gt;
+
+&lt;circle <strong>id="circle"</strong>
+  cx="50" cy="50" r="40" /&gt;</pre>
+      <figcaption><a href="use_graphic/style/paint/graphic.svg" target="_blank">graphic.svg</a></figcaption>
+    </figure>
+  </div>
+
+  <ul class="result">
+    <li title="Warning">Chrome</li>
+    <li title="Warning">Firefox</li>
+    <li title="Warning">Safari</li>
+    <li title="Unknown">Edge</li>
+    <li title="Fail">IE11</li>
+  </ul>
+
+  <footer>
+    <p>This test raises the same questions as the previous one.</p>
+  </footer>
+</article>
+
+<article>
+  <header>
+    <h2>Remote graphic: embedded CSS fill property</h2>
+    <p>We use a remote graphic element colored with a CSS fill property, which is embedded within the <code>&lt;use&gt;</code> Shadow tree.</p>
+  </header>
+
+  <div class="code">
+    <iframe src="use_graphic/embed/base.svg"></iframe>
+
+    <figure class="file">
+<pre>&lt;use <strong>xlink:href="graphic.svg#circle"</strong> /&gt;</pre>
+      <figcaption><a href="use_graphic/embed/base.svg" target="_blank">base.svg</a></figcaption>
+    </figure>
+
+    <figure class="file">
+<pre>&lt;g <strong>id="circle"</strong>&gt;
+  &lt;style&gt;
+    circle {
+      <strong>fill: green;</strong>
+    }
+  &lt;/style&gt;
+
+  &lt;circle
+    cx="50" cy="50" r="40" /&gt;
+&lt;/g&gt;</pre>
+      <figcaption><a href="use_graphic/embed/graphic.svg" target="_blank">graphic.svg</a></figcaption>
+    </figure>
+  </div>
+
+  <ul class="result">
+    <li title="Fail">Chrome</li>
+    <li title="Fail">Firefox</li>
+    <li title="Fail">Safari</li>
+    <li title="Unknown">Edge</li>
+    <li title="Fail">IE11</li>
+  </ul>
+
+  <footer>
+    <p>As per the SVG2 specification, <a href="https://svgwg.org/svg2-draft/struct.html#UseStyleInheritance"><code>&lt;style&gt;</code> elements embedded within the <code>&lt;use&gt;</code> Shadow tree should apply to elements within that Shadow tree.</a></p>
+  </footer>
+</article>
+
+<article>
+  <header>
+    <h2>Remote graphic: embedded CSS fill property (with a paint server)</h2>
+    <p>We use a remote graphic element colored with a CSS fill property referencing a paint server, both being embedded within the <code>&lt;use&gt;</code> Shadow tree.</p>
+  </header>
+
+  <div class="code">
+    <iframe src="use_graphic/embed/paint/base.svg"></iframe>
+
+    <figure class="file">
+<pre>&lt;use <strong>xlink:href="graphic.svg#circle"</strong> /&gt;</pre>
+      <figcaption><a href="use_graphic/embed/paint/base.svg" target="_blank">base.svg</a></figcaption>
+    </figure>
+
+    <figure class="file">
+<pre>&lt;g <strong>id="circle"</strong>&gt;
+  &lt;radialGradient <strong>id="gradient"</strong>&gt;
+    &lt;stop offset="0%" stop-color="green" /&gt;
+  &lt;/radialGradient&gt;
+
+  &lt;style&gt;
+    circle {
+      <strong>fill: url(#gradient);</strong>
+    }
+  &lt;/style&gt;
+
+  &lt;circle
+    cx="50" cy="50" r="40" /&gt;
+&lt;/g&gt;</pre>
+      <figcaption><a href="use_graphic/embed/paint/graphic.svg" target="_blank">graphic.svg</a></figcaption>
+    </figure>
+  </div>
+
+  <ul class="result">
+    <li title="Fail">Chrome</li>
+    <li title="Fail">Firefox</li>
+    <li title="Fail">Safari</li>
+    <li title="Unknown">Edge</li>
+    <li title="Fail">IE11</li>
+  </ul>
+
+  <footer>
+    <p>As per the SVG2 specification, <a href="https://svgwg.org/svg2-draft/struct.html#UseStyleInheritance"><code>&lt;style&gt;</code> elements embedded within the <code>&lt;use&gt;</code> Shadow tree should apply to elements within that Shadow tree.</a></p>
+  </footer>
+</article>
+</section>
+
+<!-- Local use style overload -->
+<section>
+<header>
+  <h1>Overloading local style with <code>&lt;use&gt;</code></h1>
+  <p>All these tests check how browsers handle style overload with <code>&lt;use&gt;</code> on local references</p>
+</header>
+
+<article>
+  <header>
+    <h2>Local use overload: fill attribute vs. nothing</h2>
+    <p>We test if the fill attribute on a <code>&lt;use&gt;</code> element is applied on a duplicated local element without any fill definition.</p>
+  </header>
+
+  <div class="code">
+    <iframe src="use_overload_local/inline/nothing/base.svg"></iframe>
+
+    <figure class="file">
+<pre>&lt;defs&gt;
+  &lt;circle <strong>id="circle"</strong>
+    cx="50" cy="50" r="40" /&gt;
+&lt;/defs&gt;
+
+&lt;use <strong>xlink:href="#circle"</strong>
+  <strong>fill="green"</strong> /&gt;</pre>
+      <figcaption><a href="use_overload_local/inline/nothing/base.svg" target="_blank">base.svg</a></figcaption>
+    </figure>
+  </div>
+
+  <ul class="result">
+    <li title="Pass">Chrome</li>
+    <li title="Pass">Firefox</li>
+    <li title="Pass">Safari</li>
+    <li title="Pass">Edge</li>
+    <li title="Pass">IE11</li>
+  </ul>
+</article>
+
+<article>
+  <header>
+    <h2>Local use overload: fill attribute vs. fill attribute</h2>
+    <p>We test if the fill attribute on a <code>&lt;use&gt;</code> element is <strong>not</strong> applied on a duplicated local element with its own fill attribute</p>
+  </header>
+
+  <div class="code">
+    <iframe src="use_overload_local/inline/inline/base.svg"></iframe>
+
+    <figure class="file">
+<pre>&lt;defs&gt;
+  &lt;circle <strong>id="circle"</strong>
+    cx="50" cy="50" r="40"
+    <strong>fill="green"</strong> /&gt;
+&lt;/defs&gt;
+
+&lt;use <strong>xlink:href="#circle"</strong>
+  fill="red" /&gt;</pre>
+      <figcaption><a href="use_overload_local/inline/inline/base.svg" target="_blank">base.svg</a></figcaption>
+    </figure>
+  </div>
+
+  <ul class="result">
+    <li title="Pass">Chrome</li>
+    <li title="Pass">Firefox</li>
+    <li title="Pass">Safari</li>
+    <li title="Pass">Edge</li>
+    <li title="Pass">IE11</li>
+  </ul>
+</article>
+
+<article>
+  <header>
+    <h2>Local use overload: fill attribute vs. fill property</h2>
+    <p>We test if the fill attribute on a <code>&lt;use&gt;</code> element is <strong>not</strong> applied on a duplicated local element styled with a fill property</p>
+  </header>
+
+  <div class="code">
+    <iframe src="use_overload_local/inline/style/base.svg"></iframe>
+
+    <figure class="file">
+<pre>&lt;style&gt;
+  circle {
+    <strong>fill: green;</strong>
+  }
+&lt;/style&gt;
+
+&lt;defs&gt;
+  &lt;circle  <strong>id="circle"</strong>
+    cx="50" cy="50" r="40" /&gt;
+&lt;/defs&gt;
+
+&lt;use <strong>xlink:href="#circle"</strong>
+  fill="red" /&gt;</pre>
+      <figcaption><a href="use_overload_local/inline/style/base.svg" target="_blank">base.svg</a></figcaption>
+    </figure>
+  </div>
+
+  <ul class="result">
+    <li title="Pass">Chrome</li>
+    <li title="Pass">Firefox</li>
+    <li title="Pass">Safari</li>
+    <li title="Pass">Edge</li>
+    <li title="Pass">IE11</li>
+  </ul>
+</article>
+
+<article>
+  <header>
+    <h2>Local use overload: fill property vs. nothing</h2>
+    <p>We test if the CSS fill property applied to a <code>&lt;use&gt;</code> element is also applied on a duplicated local element without any fill definition</p>
+  </header>
+
+  <div class="code">
+    <iframe src="use_overload_local/style/nothing/base.svg"></iframe>
+
+    <figure class="file">
+<pre>&lt;style&gt;
+  use {
+    <strong>fill: green;</strong>
+  }
+&lt;/style&gt;
+
+&lt;/defs&gt;
+  &lt;circle <strong>id="circle"</strong>
+    cx="50" cy="50" r="40" /&gt;
+&lt;/defs&gt;
+
+&lt;use <strong>xlink:href="#circle"</strong> /&gt;</pre>
+      <figcaption><a href="use_overload_local/style/nothing/base.svg" target="_blank">base.svg</a></figcaption>
+    </figure>
+  </div>
+
+  <ul class="result">
+    <li title="Pass">Chrome</li>
+    <li title="Pass">Firefox</li>
+    <li title="Pass">Safari</li>
+    <li title="Pass">Edge</li>
+    <li title="Pass">IE11</li>
+  </ul>
+</article>
+
+<article>
+  <header>
+    <h2>Local use overload: fill property vs. fill attribute</h2>
+    <p>We test if the CSS fill property applied to a <code>&lt;use&gt;</code> element is <strong>not</strong> applied on a duplicated local element without a fill attribute</p>
+  </header>
+
+  <div class="code">
+    <iframe src="use_overload_local/style/inline/base.svg"></iframe>
+
+    <figure class="file">
+<pre>&lt;style&gt;
+  use {
+    fill: red;
+  }
+&lt;/style&gt;
+
+&lt;/defs&gt;
+  &lt;circle <strong>id="circle"</strong>
+    cx="50" cy="50" r="40"
+    <strong>fill="green"</strong> /&gt;
+&lt;/defs&gt;
+
+&lt;use <strong>xlink:href="#circle"</strong> /&gt;</pre>
+      <figcaption><a href="use_overload_local/style/inline/base.svg" target="_blank">base.svg</a></figcaption>
+    </figure>
+  </div>
+
+  <ul class="result">
+    <li title="Pass">Chrome</li>
+    <li title="Pass">Firefox</li>
+    <li title="Pass">Safari</li>
+    <li title="Pass">Edge</li>
+    <li title="Pass">IE11</li>
+  </ul>
+</article>
+
+<article>
+  <header>
+    <h2>Local use overload: fill property vs. fill property</h2>
+    <p>We test if the CSS fill property applied to a <code>&lt;use&gt;</code> element is <strong>not</strong> applied on a duplicated local element styled with another CSS fill property</p>
+  </header>
+
+  <div class="code">
+    <iframe src="use_overload_local/style/style/base.svg"></iframe>
+
+    <figure class="file">
+<pre>&lt;style&gt;
+  circle {
+    <strong>fill: green;</strong>
+  }
+
+  use {
+    fill: red;
+  }
+&lt;/style&gt;
+
+&lt;/defs&gt;
+  &lt;circle <strong>id="circle"</strong>
+    cx="50" cy="50" r="40" /&gt;
+&lt;/defs&gt;
+
+&lt;use <strong>xlink:href="#circle"</strong> /&gt;</pre>
+      <figcaption><a href="use_overload_local/style/style/base.svg" target="_blank">base.svg</a></figcaption>
+    </figure>
+  </div>
+
+  <ul class="result">
+    <li title="Pass">Chrome</li>
+    <li title="Pass">Firefox</li>
+    <li title="Pass">Safari</li>
+    <li title="Pass">Edge</li>
+    <li title="Pass">IE11</li>
+  </ul>
+</article>
+</section>
+
+<!-- Remote use style overload -->
+<section>
+<header>
+  <h1>Overloading remote style with <code>&lt;use&gt;</code></h1>
+  <p>All these tests check how browsers handle style overload with <code>&lt;use&gt;</code> on remote references</p>
+</header>
+
+<article>
+  <header>
+    <h2>Remote use overload: fill attribute vs. nothing</h2>
+    <p>We test if the fill attribute on a <code>&lt;use&gt;</code> element is applied on a duplicated remote element without any fill definition.</p>
+  </header>
+
+  <div class="code">
+    <iframe src="use_overload_remote/inline/nothing/base.svg"></iframe>
+
+    <figure class="file">
+<pre>&lt;use <strong>xlink:href="graphic.svg#circle"</strong>
+  <strong>fill="green"</strong> /&gt;</pre>
+      <figcaption><a href="use_overload_remote/inline/nothing/base.svg" target="_blank">base.svg</a></figcaption>
+    </figure>
+
+    <figure class="file">
+<pre>&lt;circle <strong>id="circle"</strong>
+  cx="50" cy="50" r="40" /&gt;</pre>
+      <figcaption><a href="use_overload_remote/inline/nothing/graphic.svg" target="_blank">graphic.svg</a></figcaption>
+    </figure>
+  </div>
+
+  <ul class="result">
+    <li title="Pass">Chrome</li>
+    <li title="Pass">Firefox</li>
+    <li title="Pass">Safari</li>
+    <li title="Unknown">Edge</li>
+    <li title="Fail">IE11</li>
+  </ul>
+</article>
+
+<article>
+  <header>
+    <h2>Remote use overload: fill attribute vs. fill attribute</h2>
+    <p>We test if the fill attribute on a <code>&lt;use&gt;</code> element is <strong>not</strong> applied on a duplicated remote element with its own fill attribute</p>
+  </header>
+
+  <div class="code">
+    <iframe src="use_overload_remote/inline/inline/base.svg"></iframe>
+
+    <figure class="file">
+<pre>&lt;use <strong>xlink:href="graphic.svg#circle"</strong>
+  fill="red" /&gt;</pre>
+      <figcaption><a href="use_overload_remote/inline/inline/base.svg" target="_blank">base.svg</a></figcaption>
+    </figure>
+
+    <figure class="file">
+<pre>&lt;circle <strong>id="circle"</strong>
+  cx="50" cy="50" r="40"
+  <strong>fill="green"</strong> /&gt;</pre>
+      <figcaption><a href="use_overload_remote/inline/inline/graphic.svg" target="_blank">graphic.svg</a></figcaption>
+    </figure>
+  </div>
+
+  <ul class="result">
+    <li title="Pass">Chrome</li>
+    <li title="Pass">Firefox</li>
+    <li title="Pass">Safari</li>
+    <li title="Unknown">Edge</li>
+    <li title="Fail">IE11</li>
+  </ul>
+</article>
+
+<article>
+  <header>
+    <h2>Remote use overload: fill attribute vs. fill property</h2>
+    <p>We test if the fill attribute on a <code>&lt;use&gt;</code> element is  applied on a duplicated remote element styled with a fill property</p>
+  </header>
+
+  <div class="code">
+    <iframe src="use_overload_remote/inline/style/base.svg"></iframe>
+
+    <figure class="file">
+<pre>&lt;use <strong>xlink:href="graphic.svg#circle"</strong>
+  fill="green" /&gt;</pre>
+      <figcaption><a href="use_overload_remote/inline/style/base.svg" target="_blank">base.svg</a></figcaption>
+    </figure>
+
+    <figure class="file">
+<pre>&lt;style&gt;
+  circle {
+    <strong>fill: red;</strong>
+  }
+&lt;/style&gt;
+
+&lt;circle <strong>id="circle"</strong>
+  cx="50" cy="50" r="40" /&gt;</pre>
+      <figcaption><a href="use_overload_remote/inline/style/graphic.svg" target="_blank">graphic.svg</a></figcaption>
+    </figure>
+  </div>
+
+  <ul class="result">
+    <li title="Warning">Chrome</li>
+    <li title="Warning">Firefox</li>
+    <li title="Warning">Safari</li>
+    <li title="Unknown">Edge</li>
+    <li title="Fail">IE11</li>
+  </ul>
+
+  <footer>
+    <p>As a follow up of test <a href="#remote-graphic-css-fill-property">4.4 Remote graphic: CSS fill property</a> the behavior seams right but the spec should be clarified.</p>
+  </footer>
+</article>
+
+<article>
+  <header>
+    <h2>Remote use overload: fill attribute vs. embedded fill property</h2>
+    <p>We test if the fill attribute on a <code>&lt;use&gt;</code> element is <strong>not</strong> applied on a duplicated remote element styled with a fill property part of the Shadow tree</p>
+  </header>
+
+  <div class="code">
+    <iframe src="use_overload_remote/inline/embed/base.svg"></iframe>
+
+    <figure class="file">
+<pre>&lt;use <strong>xlink:href="graphic.svg#circle"</strong>
+  fill="red" /&gt;</pre>
+      <figcaption><a href="use_overload_remote/inline/embed/base.svg" target="_blank">base.svg</a></figcaption>
+    </figure>
+
+    <figure class="file">
+<pre>&lt;g <strong>id="circle"</strong>&gt;
+  &lt;style&gt;
+    circle {
+      <strong>fill: green;</strong>
+    }
+  &lt;/style&gt;
+
+  &lt;circle
+    cx="50" cy="50" r="40" /&gt;
+&lt;/g&gt;</pre>
+      <figcaption><a href="use_overload_remote/inline/embed/graphic.svg" target="_blank">graphic.svg</a></figcaption>
+    </figure>
+  </div>
+
+  <ul class="result">
+    <li title="Fail">Chrome</li>
+    <li title="Fail">Firefox</li>
+    <li title="Fail">Safari</li>
+    <li title="Unknown">Edge</li>
+    <li title="Fail">IE11</li>
+  </ul>
+</article>
+
+<article>
+  <header>
+    <h2>Remote use overload: fill property vs. nothing</h2>
+    <p>We test if the CSS fill property applied to a <code>&lt;use&gt;</code> element is also applied on a duplicated remote element without any fill definition</p>
+  </header>
+
+  <div class="code">
+    <iframe src="use_overload_remote/style/nothing/base.svg"></iframe>
+
+    <figure class="file">
+<pre>&lt;style&gt;
+  use {
+    <strong>fill: green;</strong>
+  }
+&lt;/style&gt;
+
+&lt;use <strong>xlink:href="#circle"</strong> /&gt;</pre>
+      <figcaption><a href="use_overload_remote/style/nothing/base.svg" target="_blank">base.svg</a></figcaption>
+    </figure>
+
+    <figure class="file">
+<pre>&lt;circle <strong>id="circle"</strong>
+  cx="50" cy="50" r="40" /&gt;</pre>
+      <figcaption><a href="use_overload_remote/style/nothing/graphic.svg" target="_blank">graphic.svg</a></figcaption>
+    </figure>
+  </div>
+
+  <ul class="result">
+    <li title="Pass">Chrome</li>
+    <li title="Pass">Firefox</li>
+    <li title="Pass">Safari</li>
+    <li title="Unknown">Edge</li>
+    <li title="Fail">IE11</li>
+  </ul>
+</article>
+
+<article>
+  <header>
+    <h2>Remote use overload: fill property vs. fill attribute</h2>
+    <p>We test if the CSS fill property applied to a <code>&lt;use&gt;</code> element is <strong>not</strong> applied on a duplicated remote element without a fill attribute</p>
+  </header>
+
+  <div class="code">
+    <iframe src="use_overload_remote/style/inline/base.svg"></iframe>
+
+    <figure class="file">
+<pre>&lt;style&gt;
+  use {
+    fill: red;
+  }
+&lt;/style&gt;
+
+&lt;use <strong>xlink:href="#circle"</strong> /&gt;</pre>
+      <figcaption><a href="use_overload_remote/style/inline/base.svg" target="_blank">base.svg</a></figcaption>
+    </figure>
+
+    <figure class="file">
+<pre>&lt;circle <strong>id="circle"</strong>
+  cx="50" cy="50" r="40"
+  <strong>fill="green"</strong> /&gt;</pre>
+      <figcaption><a href="use_overload_remote/style/inline/graphicsvg" target="_blank">graphic.svg</a></figcaption>
+    </figure>
+  </div>
+
+  <ul class="result">
+    <li title="Pass">Chrome</li>
+    <li title="Pass">Firefox</li>
+    <li title="Pass">Safari</li>
+    <li title="Unknown">Edge</li>
+    <li title="Fail">IE11</li>
+  </ul>
+</article>
+
+<article>
+  <header>
+    <h2>Remote use overload: fill property vs. fill property</h2>
+    <p>We test if the CSS fill property applied to a <code>&lt;use&gt;</code> element is <strong>not</strong> applied on a duplicated remote element styled with another CSS fill property</p>
+  </header>
+
+  <div class="code">
+    <iframe src="use_overload_remote/style/style/base.svg"></iframe>
+
+    <figure class="file">
+<pre>&lt;style&gt;
+  use {
+    fill: green;
+  }
+&lt;/style&gt;
+
+&lt;use <strong>xlink:href="#circle"</strong> /&gt;</pre>
+      <figcaption><a href="use_overload_remote/style/style/base.svg" target="_blank">base.svg</a></figcaption>
+    </figure>
+
+    <figure class="file">
+<pre>&lt;style&gt;
+  circle {
+    <strong>fill: red;</strong>
+  }
+&lt;/style&gt;
+
+&lt;circle <strong>id="circle"</strong>
+  cx="50" cy="50" r="40" /&gt;</pre>
+      <figcaption><a href="use_overload_local/style/style/graphic.svg" target="_blank">graphic.svg</a></figcaption>
+    </figure>
+  </div>
+
+  <ul class="result">
+    <li title="Pass">Chrome</li>
+    <li title="Pass">Firefox</li>
+    <li title="Pass">Safari</li>
+    <li title="Unknown">Edge</li>
+    <li title="Fail">IE11</li>
+  </ul>
+
+  <footer>
+    <p>As a follow up of test <a href="#remote-graphic-css-fill-property">4.4 Remote graphic: CSS fill property</a> the behavior seams right but the spec should be clarified.</p>
+  </footer>
+</article>
+</section>
+</main>
