@@ -12,7 +12,7 @@ some tricky workarounds to deal with them. *SVG Extend* doesn't plan to fix
 them nor to provide workarounds but we document those issues here in order to
 better know what difficulties we are facing.
 
-## No EcmaScript modules with SVG
+## No ECMAScript modules with SVG
 
 Neither [Chrome](https://bugs.chromium.org/p/chromium/issues/detail?id=717643)
 nor Firefox support ES modules with the SVG element:
@@ -33,9 +33,13 @@ SVG implementation.
 This lack of support has an impact when using CSS transforms. As
 `backface-visibility` isn't supported, a `180deg` rotation on the _x_ or _y_
 axis will flip a shape instead of hiding it. If this is the intended purpose, A
-possible workaround consist in limiting rotation to 90deg. This can be tricky
+possible workaround consist in limiting rotation to `90deg`. This can be tricky
 when dealing with animation as it requires to think animation that are somewhat
-shorter than expected and with side effects on easing.
+shorter than expected and with side effects on easing. Another possible
+workaround to prevent those side effect is to apply an `opacity:0`,
+`visible:hidden` or `display:none` to the element when appropriate (usually at
+50% of the animation). However, even like that, for none linear animation it
+can be tricky to find the right moment to hide the element.
 
 ## CSS Gradients (and other CSS image functions)
 
@@ -59,3 +63,25 @@ This is a spec issue due to a lack of commitment from implementors (See
 It also appears that Chrome, Safari and Firefox does not apply stylesheets that are part of the `<use>` shadow tree to elements of that same shadow tree.
 
 For more details see [this full tests suite](tests/use-and-paint).
+
+## SVG Animation controls
+
+When an SVG animation element is listening for an element with an ID event, Google Chrome only accept event from SVG elements but not from HTML element.
+
+In [the following example](tests/doc-controls), the circle may become blue but it cannot be green on Google Chrome:
+
+```xml
+<button id="GRN">
+  Make it green
+</button>
+
+<svg viewBox="0 0 100 150">
+  <rect id="BLU" width="100%" height="20" />
+  <text x="50" y="15" fill="white">Make it blue</text>
+
+  <circle cx="50" cy="75" r="25">
+    <set begin="GRN.click" attributeName="fill" to="green" />
+    <set begin="BLU.click" attributeName="fill" to="blue" />
+  </circle>
+</svg>
+```
